@@ -9,7 +9,7 @@ HashTableVoidTest: HashTableVoidTest.cc HashTableVoid.cc
 IRCServer: IRCServer.cc
 	gcc -g -o IRCServer IRCServer.cc
 	git add -A  >> .local.git.out
-	git commit -a -m "$total of $totalmax" >> .local.git.out
+	git commit -a -m "Make IRCServer" >> .local.git.out
 
 clean:
 	rm -f *.out
