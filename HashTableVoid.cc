@@ -97,7 +97,7 @@ HashTableVoidIterator::HashTableVoidIterator(HashTableVoid * hashTable)
    for(_currentBucket = 0; _currentBucket < _hashTable->TableSize;_currentBucket++) { 
      _currentEntry = _hashTable->_buckets[_currentBucket];
      while(_currentEntry != NULL) { 
-       printf("_currentBucket: %d\n",_currentBucket); // pass &key and data
+       printf("_currentBucket: %s\n",_currentEntry->_key); // pass &key and data
        _currentEntry = _currentEntry->_next;
      }
    }
