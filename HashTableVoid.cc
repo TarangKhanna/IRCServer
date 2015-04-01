@@ -7,8 +7,13 @@
 // Obtain the hash code of a key
 int HashTableVoid::hash(const char * key)
 {
-  // Add implementation here
-  return 0;
+  int i = 0;
+  const char * k = key;
+  while(*k) {
+    i += *k;
+    k++;
+  }
+  return i%TableSize;
 }
 
 // Constructor for hash table. Initializes hash table
