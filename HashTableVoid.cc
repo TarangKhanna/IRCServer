@@ -3,7 +3,7 @@
 // Implementation of a HashTable that stores void *
 //
 #include "HashTableVoid.h"
-
+#include <stdio.h>
 // Obtain the hash code of a key
 int HashTableVoid::hash(const char * key)
 {
@@ -37,10 +37,13 @@ bool HashTableVoid::insertItem( const char * key, void * data)
      e->_data = data;
    return true;
   }
-  e = e->_next; }
+  e = e->_next;
+  }
   // Entry not found. Add it.
-  e = new HashTableVoidEntry; e->_key = strdup(key); e->_data = data;
-  e->_next = _buckets[h]; _buckets[h] = e;
+  e = new HashTableVoidEntry; e->_key = strdup(key); 
+  e->_data = data;
+  e->_next = _buckets[h]; 
+  _buckets[h] = e;
   return false;
 }
 
@@ -50,10 +53,11 @@ bool HashTableVoid::find( const char * key, void ** data)
 {
   // Get hash bucket 
    int h = hash(key);
-   HashTableVoidEntry * e = _buckets[h]; while (e!=NULL) {
-   if (!strcmp(e->_key, key)) { // Entry found
-     *data = e->_data;
-   return true; 
+   HashTableVoidEntry * e = _buckets[h]; 
+   while (e!=NULL) {
+    if (!strcmp(e->_key, key)) { // Entry found
+      *data = e->_data;
+    return true; 
    }
    e = e->_next;
    }
@@ -87,15 +91,22 @@ bool HashTableVoid::removeElement(const char * key)
 
 // Creates an iterator object for this hash table
 HashTableVoidIterator::HashTableVoidIterator(HashTableVoid * hashTable)
-{
-  // Add implementation here
-
+{  
+   _hashTable = hashTable;
+   printf("%d",hashTable->TableSize);
+   for(_currentBucket = 0; _currentBucket < 2039;_currentBucket++) { 
+     //HashTableVoidEntry * e = _buckets[_currentBucket]; // find not empty bucket
+     //while(e != NULL) { 
+       //printf("_currentBucket: %d",_currentBucket); // pass &key and data
+       //e = e->next;
+     //}
+   }
 }
 
 // Returns true if there is a next element. Stores data value in data.
 bool HashTableVoidIterator::next(const char * & key, void * & data)
 {
-  // Add implementation here
+  
   return false;
 }
 
