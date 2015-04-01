@@ -93,7 +93,7 @@ bool HashTableVoid::removeElement(const char * key)
 HashTableVoidIterator::HashTableVoidIterator(HashTableVoid * hashTable)
 {  
    _hashTable = hashTable;
-   printf("%d",hashTable->TableSize);
+   printf("%d",_hashTable->TableSize);
    for(_currentBucket = 0; _currentBucket < 2039;_currentBucket++) { 
      //HashTableVoidEntry * e = _buckets[_currentBucket]; // find not empty bucket
      //while(e != NULL) { 
