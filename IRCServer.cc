@@ -227,13 +227,13 @@ IRCServer::processRequest( int fd )
     int d = 0;
     size_t pos = 0;
     string token;
-    while ((pos = s.find(delimiter)) != std::string::npos) {
+    do{
       token = s.substr(0, pos);
       std::cout << token << std::endl;
       strings[d] = token;  
       std::cout << strings[d] << " ARRAY"<< std::endl;
       s.erase(0, pos + delimiter.length());
-    }
+    }while ((pos = s.find(delimiter)) != std::string::npos); 
 	const char * command = "ADD-USER";
 	const char * user = strings[1].c_str(); //strings[1]
 	const char * password = "spider";
