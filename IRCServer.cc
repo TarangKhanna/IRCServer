@@ -230,7 +230,8 @@ IRCServer::processRequest( int fd )
     while ((pos = s.find(delimiter)) != std::string::npos) {
       token = s.substr(0, pos);
       std::cout << token << std::endl;
-      strings[d] = token; 
+      strings[d] = token;  
+      std::cout << strings[d] << " ARRAY"<< std::endl;
       s.erase(0, pos + delimiter.length());
     }
 	const char * command = "ADD-USER";
@@ -297,7 +298,7 @@ void
 IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
 	// Here add a new user. For now always return OK.
-
+    // unique name--checkPassword
 	const char * msg =  "OK\r\n";
 	write(fd, msg, strlen(msg)); // to telnet
 
