@@ -40,8 +40,7 @@ bool HashTableVoid::insertItem( const char * key, void * data)
   e = e->_next;
   }
   // Entry not found. Add it.
-  e = new HashTableVoidEntry; 
-  e->_key = strdup(key); 
+  e = new HashTableVoidEntry; e->_key = strdup(key); 
   e->_data = data;
   e->_next = _buckets[h]; 
   _buckets[h] = e;
@@ -103,7 +102,7 @@ bool HashTableVoidIterator::next(const char * & key, void * & data)
 {
   if(_currentEntry != NULL) { 
        printf("_currentBucket: %d at %s HERE\n",(int*)_currentEntry->_data,_currentEntry->_key);
-      // _currentEntry = _currentEntry->_next; 
+       _currentEntry = _currentEntry->_next; 
        if(_currentEntry != NULL) {
         _currentBucket++;
         _currentEntry = _hashTable->_buckets[_currentBucket];
@@ -111,12 +110,12 @@ bool HashTableVoidIterator::next(const char * & key, void * & data)
        }
   } else {
       for(; _currentBucket < _hashTable->TableSize;_currentBucket++) { 
+
         _currentEntry = _hashTable->_buckets[_currentBucket]; // hashtablevoid entry
         //_currentEntry = _currentEntry->_next; 
        if(_currentEntry != NULL) {
          _currentBucket++;
-         printf("_currentBucket: at %s\n",(int*)_currentEntry->_data , _currentEntry->_key);
-         _currentEntry = _hashTable->_buckets[_currentBucket];
+         printf("_currentBucket: %d at %s\n",(int*)_currentEntry->_data , _currentEntry->_key);
          return true;
        }
     }
