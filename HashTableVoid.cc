@@ -111,7 +111,6 @@ bool HashTableVoidIterator::next(const char * & key, void * & data)
        }
   } else {
       for(; _currentBucket < _hashTable->TableSize;_currentBucket++) { 
-
         _currentEntry = _hashTable->_buckets[_currentBucket]; // hashtablevoid entry
         //_currentEntry = _currentEntry->_next; 
        if(_currentEntry != NULL) {
