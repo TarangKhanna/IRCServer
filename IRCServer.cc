@@ -29,8 +29,11 @@ const char * usage =
 #include <string.h>
 #include <stdio.h>
 #include <time.h>
-
+#include <string>
+#include <sstream>
+#include <iostream>
 #include "IRCServer.h"
+using namespace std;
 
 int QueueLength = 5;
 
@@ -170,7 +173,7 @@ main( int argc, char ** argv )
 void
 IRCServer::processRequest( int fd )
 {
-	// Buffer used to store the comand received from the client
+	// Buffer used to store the command received from the client
 	const int MaxCommandLine = 1024;
 	char commandLine[ MaxCommandLine + 1 ];
 	int commandLineLength = 0;
@@ -188,11 +191,11 @@ IRCServer::processRequest( int fd )
 
 	// Read character by character until a \n is found or the command string is full.
 	while ( commandLineLength < MaxCommandLine &&
-		read( fd, &newChar, 1) > 0 ) {
+		read( fd, &newChar, 1) > 0 ) { // read from client
 
 		if (newChar == '\n' && prevChar == '\r') {
 			break;
-		}
+		} 
 		
 		commandLine[ commandLineLength ] = newChar;
 		commandLineLength++;
@@ -204,16 +207,34 @@ IRCServer::processRequest( int fd )
 	// Eliminate last \r
 	commandLineLength--;
         commandLine[ commandLineLength ] = 0;
-
+    
 	printf("RECEIVED: %s\n", commandLine);
+    // breakup comandLine using substr and delimiter && s.find-- then store into an array
 
 	printf("The commandLine has the following format:\n");
 	printf("COMMAND <user> <password> <arguments>. See below.\n");
 	printf("You need to separate the commandLine into those components\n");
 	printf("For now, command, user, and password are hardwired.\n");
-
+   // int d = 0; // delimiter
+    //while(commandLine[d] != 0) {
+      // std::string s = "scott>=tiger";
+       //std::string delimiter = ">=";
+       //std::string token = s.substr(0, s.find(delimiter)); // token is "scott"
+    //}
+    string strings[100];
+    string s(commandLine);
+    std::string delimiter = " ";
+    int d = 0;
+    size_t pos = 0;
+    string token;
+    while ((pos = s.find(delimiter)) != std::string::npos) {
+      token = s.substr(0, pos);
+      std::cout << token << std::endl;
+      strings[d] = token; 
+      s.erase(0, pos + delimiter.length());
+    }
 	const char * command = "ADD-USER";
-	const char * user = "peter";
+	const char * user = strings[1].c_str(); //strings[1]
 	const char * password = "spider";
 	const char * args = "";
 
@@ -278,7 +299,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 	// Here add a new user. For now always return OK.
 
 	const char * msg =  "OK\r\n";
-	write(fd, msg, strlen(msg));
+	write(fd, msg, strlen(msg)); // to telnet
 
 	return;		
 }

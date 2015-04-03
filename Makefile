@@ -7,7 +7,7 @@ HashTableVoidTest: HashTableVoidTest.cc HashTableVoid.cc
 	g++ -g -o HashTableVoidTest HashTableVoidTest.cc HashTableVoid.cc
 
 IRCServer: IRCServer.cc
-	gcc -g -o IRCServer IRCServer.cc
+	g++ -g -o IRCServer IRCServer.cc
 	git add -A  >> .local.git.out
 	git commit -a -m "Make IRCServer" >> .local.git.out
 

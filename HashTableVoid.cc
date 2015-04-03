@@ -93,20 +93,35 @@ bool HashTableVoid::removeElement(const char * key)
 HashTableVoidIterator::HashTableVoidIterator(HashTableVoid * hashTable)
 {  
    _hashTable = hashTable;
+   _currentBucket = 0;
    //printf("%d",_hashTable->_buckets);
-   for(_currentBucket = 0; _currentBucket < _hashTable->TableSize;_currentBucket++) { 
-     _currentEntry = _hashTable->_buckets[_currentBucket];
-     while(_currentEntry != NULL) { 
-       printf("_currentBucket: %s\n",_currentEntry->_key); // pass &key and data
-       _currentEntry = _currentEntry->_next;
-     }
-   }
+   //for(_currentBucket = 0; _currentBucket < _hashTable->TableSize;_currentBucket++) { 
+     _currentEntry = _hashTable->_buckets[_currentBucket]; // hashtablevoid entry
+     //while(_currentEntry != NULL) { 
+       //printf("_currentBucket: %s\n",_currentEntry->_key); // pass &key and data
+       //_currentEntry = _currentEntry->_next;
+     //}
+   //}
 }
 
 // Returns true if there is a next element. Stores data value in data.
 bool HashTableVoidIterator::next(const char * & key, void * & data)
 {
-  
+  if(_currentEntry != NULL) { 
+       //printf("_currentBucket: %s\n",_currentEntry->_key); // pass &key and data
+       _currentEntry = _currentEntry->_next; 
+       if(_currentEntry != NULL) {
+         return true;
+       }
+  } else {
+      for(_currentBucket = 0; _currentBucket < _hashTable->TableSize;_currentBucket++) { 
+        _currentEntry = _hashTable->_buckets[_currentBucket]; // hashtablevoid entry
+        //_currentEntry = _currentEntry->_next; 
+       if(_currentEntry != NULL) {
+         return true;
+       }
+    }
+  }
   return false;
 }
 
