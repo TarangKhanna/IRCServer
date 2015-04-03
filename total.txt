@@ -1,3 +1,6 @@
 ./HashTableVoidTest test1           : 2   of 2  
 ./HashTableVoidTest test2           : 2   of 2  
 ./HashTableVoidTest test3           : 2   of 2  
+./HashTableVoidTest test4           : 0   of 2  
+./HashTableVoidTest test5           : 0   of 2  
+./HashTableVoidTest test6           : 2   of 2  
