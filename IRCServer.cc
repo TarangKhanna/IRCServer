@@ -225,14 +225,18 @@ IRCServer::processRequest( int fd )
     string s(commandLine);
     std::string delimiter = " ";
     int d = 0;
-    size_t pos = 0;
-    string token;
-    while ((pos = s.find(delimiter)) != std::string::npos) {
-      token = s.substr(0, pos);
-      std::cout << token << std::endl;
-      strings[d] = token;  
-      std::cout << strings[d] << " ARRAY"<< std::endl;
-      s.erase(0, pos + delimiter.length());
+    // size_t pos = 0;
+    // string token;
+    // while ((pos = s.find(delimiter)) != std::string::npos) {
+    //   token = s.substr(0, pos);
+    //   std::cout << token << std::endl;
+    //   strings[d] = token;  
+    //   std::cout << strings[d] << " ARRAY"<< std::endl;
+    //   s.erase(0, pos + delimiter.length());
+    // }
+    while(d<4) {
+       strings[d] = strtok(commandLine," ");
+       std::cout << strings[d] << "THIS" << std::endl;
     }
 	const char * command = "ADD-USER";
 	const char * user = strings[1].c_str(); //strings[1]
