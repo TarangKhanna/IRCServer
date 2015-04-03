@@ -102,7 +102,7 @@ HashTableVoidIterator::HashTableVoidIterator(HashTableVoid * hashTable)
 bool HashTableVoidIterator::next(const char * & key, void * & data)
 {
   if(_currentEntry != NULL) { 
-       printf("_currentBucket:val is %d &%d at %s HERE\n",_currentBucket,(int*)_currentEntry->_data,_currentEntry->_key);
+       printf("_currentBucket: %d at %s HERE\n",(int*)_currentEntry->_data,_currentEntry->_key);
       // _currentEntry = _currentEntry->_next; 
        if(_currentEntry != NULL) {
         _currentBucket++;
@@ -116,7 +116,7 @@ bool HashTableVoidIterator::next(const char * & key, void * & data)
         //_currentEntry = _currentEntry->_next; 
        if(_currentEntry != NULL) {
          _currentBucket++;
-         printf("_currentBucket: val is & %d at %s\n",_currentBucket,(int*)_currentEntry->_data , _currentEntry->_key);
+         printf("_currentBucket: at %s\n",(int*)_currentEntry->_data , _currentEntry->_key);
          return true;
        }
     }
