@@ -1085,3 +1085,21 @@ After doing this, you may fix the identity used for this commit with:
     git commit --amend --reset-author
 
  4 files changed, 20 insertions(+), 5 deletions(-)
+[master 3eeb5bf] 8 of 12
+ Committer: Tarang B Khanna <khanna17@borg18.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 7 files changed, 23 insertions(+)
+ create mode 100644 diff.out
+ create mode 100644 prog.org.out
+ create mode 100644 prog.out
+ create mode 100644 total.out
