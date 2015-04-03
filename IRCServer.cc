@@ -280,7 +280,7 @@ IRCServer::processRequest( int fd )
 void
 IRCServer::initialize()
 {
-	// Open password file
+	// Open password file-- fopen PASSWORD_FILE
 
 	// Initialize users in room
 
@@ -290,7 +290,7 @@ IRCServer::initialize()
 
 bool
 IRCServer::checkPassword(int fd, const char * user, const char * password) {
-	// Here check the password
+	// Here check the password--find user and see if correct password 
 	return true;
 }
 
