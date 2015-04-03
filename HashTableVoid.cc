@@ -115,11 +115,11 @@ bool HashTableVoidIterator::next(const char * & key, void * & data)
        }
   } else {
       for(_currentBucket = 0; _currentBucket < _hashTable->TableSize;_currentBucket++) { 
-        printf("_currentBucket: %d\n",(int*)_currentEntry->_data);
-         // hashtablevoid entry
+
+        _currentEntry = _hashTable->_buckets[_currentBucket]; // hashtablevoid entry
         //_currentEntry = _currentEntry->_next; 
        if(_currentEntry != NULL) {
-         _currentEntry = _hashTable->_buckets[_currentBucket];
+         printf("_currentBucket: %d\n",(int*)_currentEntry->_data);
          return true;
        }
     }
