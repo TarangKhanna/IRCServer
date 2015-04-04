@@ -234,12 +234,13 @@ IRCServer::processRequest( int fd )
     //   std::cout << strings[d] << " ARRAY"<< std::endl;
     //   s.erase(0, pos + delimiter.length());
     // }
-    char * pch;
-    while(d<4) {
+    char * pch = strtok (commandLine," ");
+    while(pch != NULL) {
     
        strings[d] = strtok(commandLine," ");
        std::cout << strings[d] << "THIS" << std::endl;
        d++;
+       pch = strtok (NULL," ");
     }
 	const char * command = "ADD-USER";
 	const char * user = strings[1].c_str(); //strings[1]
