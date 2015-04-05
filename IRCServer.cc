@@ -219,29 +219,19 @@ IRCServer::processRequest( int fd )
     //while(commandLine[d] != 0) {
       // std::string s = "scott>=tiger";
        //std::string delimiter = ">=";
-       //std::string token = s.substr(0, s.find(delimiter)); // token is "scott"
-    //}
-    string strings[100];
+       //std::string token = s.substr(0, s.find(delimiter)); // token is "scott
     string s(commandLine);
-    std::string delimiter = " ";
-    int d = 0;
-    // size_t pos = 0;
-    // string token;
-    // while ((pos = s.find(delimiter)) != std::string::npos) {
-    //   token = s.substr(0, pos);
-    //   std::cout << token << std::endl;
-    //   strings[d] = token;  
-    //   std::cout << strings[d] << " ARRAY"<< std::endl;
-    //   s.erase(0, pos + delimiter.length());
-    // }
-    char * pch = strtok (commandLine," ");
-    while(pch != NULL) {
-    
-       strings[d] = strtok(commandLine," ");
-       std::cout << strings[d] << "THIS" << std::endl;
-       d++;
-       pch = strtok (NULL," ");
-    }
+	istringstream iss(s);
+	string token;
+	string strings[100];
+	int d = 0;
+	while(getline(iss, token, ' '))
+	{
+          strings[d] = token;
+	      cout << strings[d] << endl;
+	      d++;
+	}
+	
 	const char * command = "ADD-USER";
 	const char * user = strings[1].c_str(); //strings[1]
 	const char * password = "spider";
