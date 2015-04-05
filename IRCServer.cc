@@ -33,6 +33,7 @@ const char * usage =
 #include <sstream>
 #include <iostream>
 #include "IRCServer.h"
+#include "HashTableVoid.h"
 using namespace std;
 
 int QueueLength = 5;
