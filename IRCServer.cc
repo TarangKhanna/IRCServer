@@ -215,27 +215,22 @@ IRCServer::processRequest( int fd )
 	printf("COMMAND <user> <password> <arguments>. See below.\n");
 	printf("You need to separate the commandLine into those components\n");
 	printf("For now, command, user, and password are hardwired.\n");
-   // int d = 0; // delimiter
-    //while(commandLine[d] != 0) {
-      // std::string s = "scott>=tiger";
-       //std::string delimiter = ">=";
-       //std::string token = s.substr(0, s.find(delimiter)); // token is "scott
     string s(commandLine);
 	istringstream iss(s);
 	string token;
 	string strings[100];
-	int d = 0;
-	while(getline(iss, token, ' '))
+	int d = 0; // also number of arguments 
+	while(getline(iss, token, ' ')) // parsing
 	{
           strings[d] = token;
-	      cout << strings[d] << endl;
+	      //cout << strings[d] << endl;
 	      d++;
 	}
 	
-	const char * command = "ADD-USER";
+	const char * command = strings[0].c_str();
 	const char * user = strings[1].c_str(); //strings[1]
-	const char * password = "spider";
-	const char * args = "";
+	const char * password = strings[2].c_str();
+	const char * args = strings[3].c_str();
 
 	printf("command=%s\n", command);
 	printf("user=%s\n", user);
