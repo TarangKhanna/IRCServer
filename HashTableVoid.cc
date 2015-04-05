@@ -29,7 +29,7 @@ HashTableVoid::HashTableVoid()
 // Substitute content if key already exists.
 bool HashTableVoid::insertItem( const char * key, void * data)
 {
-  // Get hash bucket 
+  // Bucket get 
   int h = hash(key);
   HashTableVoidEntry * e = _buckets[h]; 
   while (e!=NULL) {
