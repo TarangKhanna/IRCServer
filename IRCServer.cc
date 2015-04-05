@@ -292,6 +292,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 {
 	// Here add a new user. For now always return OK.
     // unique name--checkPassword
+    // user object create -hashtable?
 	const char * msg =  "OK\r\n";
 	write(fd, msg, strlen(msg)); // to telnet
 
@@ -299,8 +300,21 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 }
 
 void
+IRCServer::createRoom(int fd, const char * user, const char * password, const char * args)
+{
+	// create room object 
+}
+
+void
+IRCServer::listRoom(int fd, const char * user, const char * password, const char * args)
+{
+	// create room object 
+}
+
+void
 IRCServer::enterRoom(int fd, const char * user, const char * password, const char * args)
 {
+	// create room object 
 }
 
 void
