@@ -31,19 +31,20 @@ bool HashTableVoid::insertItem( const char * key, void * data)
 {
   // Bucket get 
   int h = hash(key);
-  HashTableVoidEntry * e = _buckets[h]; 
-  while (e!=NULL) {
-   if (!strcmp(e->_key, key)) { // Entry found
-     e->_data = data;
+  HashTableVoidEntry * entry = _buckets[h]; 
+  while (entry!=NULL) {
+   if (!strcmp(entry->_key, key)) { // Entry found
+     entry->_data = data;
    return true;
   }
-  e = e->_next;
+  entry = entry->_next;
   }
   // Entry not found. Add it.
-  e = new HashTableVoidEntry; e->_key = strdup(key); 
-  e->_data = data;
-  e->_next = _buckets[h]; 
-  _buckets[h] = e;
+  entry = new HashTableVoidEntry;
+  entry->_key = strdup(key); 
+  entry->_data = data;
+  entry->_next = _buckets[h]; 
+  _buckets[h] = entry;
   return false;
 }
 

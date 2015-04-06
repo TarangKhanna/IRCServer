@@ -34,7 +34,7 @@ const char * usage =
 #include <iostream>
 #include <fstream>
 #include "IRCServer.h"
-#include "HashTableVoid.h"
+//#include "HashTableVoid.h"
 using namespace std;
 
 int QueueLength = 5;
@@ -312,10 +312,15 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 {
 	// Here add a new user. For now always return OK.
     // unique name--checkPassword
-    // user object create -hashtable?
+    // user object create -hashtable
+    // use hastable with file
+    HashTableVoid h;
+    // first node is username key and data is room no. second node is message and room number.
+    //if(!h.find) 
+    h.insertItem(user,(void *)password);
 	const char * msg =  "OK\r\n";
 	write(fd, msg, strlen(msg)); // to telnet
-
+    
 	return;		
 }
 

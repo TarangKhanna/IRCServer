@@ -3,7 +3,7 @@
 #define IRC_SERVER
 
 #define PASSWORD_FILE "password.txt"
-
+#include "HashTableVoid.h"
 class IRCServer {
 	// Add any variables you need
 
