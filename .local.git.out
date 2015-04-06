@@ -1789,3 +1789,22 @@ After doing this, you may fix the identity used for this commit with:
 
  3 files changed, 33 insertions(+), 2 deletions(-)
  rewrite IRCServer (89%)
+[master a0bebb8] Make IRCServer
+ Committer: Tarang B Khanna <khanna17@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 11 files changed, 35 insertions(+), 18 deletions(-)
+ rewrite IRCServer (86%)
+ delete mode 100644 diff.out
+ delete mode 100644 prog.org.out
+ delete mode 100644 prog.out
+ delete mode 100644 total.out
