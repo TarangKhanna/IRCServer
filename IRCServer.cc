@@ -32,6 +32,7 @@ const char * usage =
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <fstream>
 #include "IRCServer.h"
 #include "HashTableVoid.h"
 using namespace std;
@@ -280,8 +281,20 @@ IRCServer::processRequest( int fd )
 void
 IRCServer::initialize()
 {
-	// Open password file-- fopen PASSWORD_FILE
-
+	// FILE *fp = fopen(PASSWORD_FILE,"a+"); // Open password file-- fopen PASSWORD_FILE
+    fstream passFile;
+    passFile.open(PASSWORD_FILE);
+    string line;
+    if (passFile.is_open())
+    {
+      while ( getline (passFile,line) )
+        {
+           cout << line << '\n';
+        }
+      passFile.close();
+    } else {
+      cout << "Can't read file";
+    }
 	// Initialize users in room
 
 	// Initalize message list
