@@ -283,6 +283,7 @@ void
 IRCServer::initialize()
 {
 	// FILE *fp = fopen(PASSWORD_FILE,"a+"); // Open password file-- fopen PASSWORD_FILE
+    printf("Initialize\n");
     fstream passFile;
     passFile.open(PASSWORD_FILE);
     string line;
@@ -315,6 +316,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     // unique name--checkPassword
     // user object create -hashtable
     // use hastable with file
+    printf("HERE1ADD\n");
     HashTableVoid h; // for storing username and password together
     // HashTableVoid h2; // for Room and username
     // first node is username key and data is room no. second node is message and room number.
