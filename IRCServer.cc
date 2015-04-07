@@ -34,7 +34,7 @@ const char * usage =
 #include <iostream>
 #include <fstream>
 #include "IRCServer.h"
-//#include "HashTableVoid.h"
+#include "HashTableVoid.h"
 using namespace std;
 
 int QueueLength = 5;
@@ -316,13 +316,9 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 void
 IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
-	// Here add a new user. For now always return OK.
     // unique name--checkPassword
     // user object create -hashtable
     // use hastable with file
-    printf("HERE1ADD\n");
-    
-    //fstream passFile;
     passFile.open(PASSWORD_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
     if (passFile.is_open())
     {
