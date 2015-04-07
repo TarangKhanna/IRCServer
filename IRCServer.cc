@@ -295,7 +295,7 @@ IRCServer::initialize()
         }
       passFile.close();
     } else {
-      cout << "Can't read file";
+      cout << "Can't read file\n";
     }
 	// Initialize users in room
 
@@ -317,7 +317,9 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     // user object create -hashtable
     // use hastable with file
     printf("HERE1ADD\n");
+    
     HashTableVoid h; // for storing username and password together
+    
     // HashTableVoid h2; // for Room and username
     // first node is username key and data is room no. second node is message and room number.
     void * pass;
