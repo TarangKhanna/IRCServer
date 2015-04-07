@@ -297,7 +297,7 @@ IRCServer::initialize()
            cout << pass[a] << '\n';
            a++;
         }
-      //passFile.close();
+      passFile.close();
     } else {
       cout << "Can't read file\n";
     }
@@ -321,10 +321,17 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     // user object create -hashtable
     // use hastable with file
     printf("HERE1ADD\n");
-    if (passFile.is_open()) {
-      cout<<"WORKS WHY";
-      passFile << "WRITE" << '\n';
-    } else { cout << "cannot write\n"; }
+    
+    //fstream passFile;
+    passFile.open(PASSWORD_FILE);
+    if (passFile.is_open())
+    {
+      printf("WORKS\n");
+      passFile<<"MORE\n";
+      passFile.close();
+    } else {
+      cout << "Can't read file\n";
+    }
     // below is with hashtable 
     HashTableVoid h; // for storing username and password together
     
