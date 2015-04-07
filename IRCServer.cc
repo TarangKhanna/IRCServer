@@ -327,7 +327,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     if (passFile.is_open())
     {
       printf("WORKS\n");
-      passFile<<"MORE\n";
+      passFile<<"THIS@#@\n";
       passFile.close();
     } else {
       cout << "Can't read file\n";
