@@ -327,27 +327,31 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     } else {
       cout << "Can't read file\n";
     }
-    // below is with hashtable 
-    HashTableVoid h; // for storing username and password together
-    
-    // HashTableVoid h2; // for Room and username
-    // first node is username key and data is room no. second node is message and room number.
-    void * pass;
-    if(!h.find(user,&pass)) { // pointer to pointer- password stored here if found
-      h.insertItem(user,(void *)password); // not found- add
-	  const char * msg =  "OK\r\n";
-	  write(fd, msg, strlen(msg)); // to telnet
-      cout << "HASHTABLE ADDED!";
-    } else {
-      cout << "DENY!";
-      if(strcmp((char *) pass, password) == 0) { // user found check pass -- still deny add
-        const char * msg =  "DENIED\r\n";
-	    write(fd, msg, strlen(msg));
-      } else {
-        const char * msg =  "DENIED\r\n";
-	    write(fd, msg, strlen(msg));
-      }
-    }
+   HashTableVoid h;
+
+  bool e;
+  e = h.insertItem("Rachael", (void*)8);
+  assert(!e);
+  
+  e = h.insertItem("Monica", (void*)9);
+  assert(!e);
+  
+  e = h.insertItem("Monica", (void*)10);
+  assert(e);
+
+  void * gradev;
+  int grade;
+  e = h.find("Rachael",&gradev);
+  grade = (long)gradev;
+  assert(e);
+  assert(grade==8);
+
+  e = h.find("Monica",&gradev);
+  grade = (long)gradev;
+  assert(e);
+  assert(grade==10);
+
+  printf("Test2 passed\n");
 	return;		
 }
 
