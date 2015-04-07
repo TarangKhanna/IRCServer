@@ -124,6 +124,7 @@ main( int argc, char ** argv )
 
 	// It will never return
 	ircServer.runServer(port);
+    ircServer.initialize();
 	
 }
 

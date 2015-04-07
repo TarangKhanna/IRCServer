@@ -4,8 +4,9 @@
 //
 #include "HashTableVoid.h"
 #include <stdio.h>
-// Obtain the hash code of a key
-int HashTableVoid::hash(const char * key)
+// Obtain hash of a key
+// custom with multiplier
+int HashTableVoid::hash(const char * key) 
 {
   int i = 0;
   int multiplier = 4;
