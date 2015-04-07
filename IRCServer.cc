@@ -322,8 +322,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     passFile.open(PASSWORD_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
     if (passFile.is_open())
     {
-      printf("WORKS\n");
-      passFile<<"THIS@#@\n";
+      passFile<< password<< '\n';
       passFile.close();
     } else {
       cout << "Can't read file\n";
