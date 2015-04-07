@@ -286,15 +286,15 @@ IRCServer::initialize()
     printf("Initialize\n");
     fstream passFile;
     passFile.open(PASSWORD_FILE);
-    string line = " ";
-    string arr[10000];
+    string line;
+    string pass[10000];
     int a = 0;
     if (passFile.is_open())
     {
       while ( getline (passFile,line) ) // separated by \n
         {
-           arr[a] = line;
-           cout << arr[a] << '\n';
+           pass[a] = line;
+           cout << pass[a] << '\n';
            a++;
         }
       passFile.close();
