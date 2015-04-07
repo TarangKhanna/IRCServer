@@ -8,9 +8,11 @@
 int HashTableVoid::hash(const char * key)
 {
   int i = 0;
+  int multiplier = 4;
   const char * k = key;
   while(*k) {
-    i += *k;
+    i += (*k)*multiplier;
+    multiplier++;
     k++;
   }
   return i%TableSize;
@@ -49,7 +51,7 @@ bool HashTableVoid::insertItem( const char * key, void * data)
 }
 
 // Find a key in the dictionary and place in "data" the corresponding record
-// Returns false if key is does not exist
+// Returns false if key does not exist
 bool HashTableVoid::find( const char * key, void ** data)
 {
   // Get hash bucket 

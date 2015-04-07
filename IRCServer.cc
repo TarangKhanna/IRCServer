@@ -314,13 +314,23 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     // unique name--checkPassword
     // user object create -hashtable
     // use hastable with file
-    HashTableVoid h;
+    HashTableVoid h; // for storing username and password together
+    // HashTableVoid h2; // for Room and username
     // first node is username key and data is room no. second node is message and room number.
-    //if(!h.find) 
-    h.insertItem(user,(void *)password);
-	const char * msg =  "OK\r\n";
-	write(fd, msg, strlen(msg)); // to telnet
-    
+    void * pass;
+    if(!h.find(user,&pass)) { // pointer to pointer- password stored here if found
+      h.insertItem(user,(void *)password); // not found- add
+	  const char * msg =  "OK\r\n";
+	  write(fd, msg, strlen(msg)); // to telnet
+    } else {
+      if(strcmp((char *) pass, password) == 0) { // found check pass 
+        const char * msg =  "OK\r\n";
+	    write(fd, msg, strlen(msg));
+      } else {
+        const char * msg =  "DENIED\r\n";
+	    write(fd, msg, strlen(msg));
+      }
+    }
 	return;		
 }
 
