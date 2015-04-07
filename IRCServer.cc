@@ -322,6 +322,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     // use hastable with file
     printf("HERE1ADD\n");
     if (passFile.is_open()) {
+      cout<<"WORKS WHY";
       passFile << "WRITE" << '\n';
     } else { cout << "cannot write\n"; }
     // below is with hashtable 
