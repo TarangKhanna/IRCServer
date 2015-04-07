@@ -323,7 +323,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     printf("HERE1ADD\n");
     
     //fstream passFile;
-    passFile.open(PASSWORD_FILE);
+    passFile.open(PASSWORD_FILE,fstream::app);
     if (passFile.is_open())
     {
       printf("WORKS\n");
