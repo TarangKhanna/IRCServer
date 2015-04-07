@@ -38,7 +38,7 @@ const char * usage =
 using namespace std;
 
 int QueueLength = 5;
-
+fstream passFile;
 int
 IRCServer::open_server_socket(int port) {
 
@@ -284,7 +284,7 @@ IRCServer::initialize()
 {
 	// FILE *fp = fopen(PASSWORD_FILE,"a+"); // Open password file-- fopen PASSWORD_FILE
     printf("Initialize\n");
-    fstream passFile;
+    //fstream passFile;
     passFile.open(PASSWORD_FILE);
     string line;
     string pass[10000];
@@ -297,7 +297,7 @@ IRCServer::initialize()
            cout << pass[a] << '\n';
            a++;
         }
-      passFile.close();
+      //passFile.close();
     } else {
       cout << "Can't read file\n";
     }
@@ -321,7 +321,8 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     // user object create -hashtable
     // use hastable with file
     printf("HERE1ADD\n");
-    
+    passFile << password << '\n';
+    // below is with hashtable 
     HashTableVoid h; // for storing username and password together
     
     // HashTableVoid h2; // for Room and username
