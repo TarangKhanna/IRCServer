@@ -323,7 +323,9 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
       h.insertItem(user,(void *)password); // not found- add
 	  const char * msg =  "OK\r\n";
 	  write(fd, msg, strlen(msg)); // to telnet
+      cout << "HASHTABLE ADDED!";
     } else {
+      cout << "DENY!";
       if(strcmp((char *) pass, password) == 0) { // user found check pass -- still deny add
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
