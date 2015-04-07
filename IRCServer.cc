@@ -349,7 +349,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
   e = h.find("Monica",&gradev);
   grade = (long)gradev;
   assert(e);
-  assert(grade==10);
+  assert(grade==1);
 
   printf("Test2 passed\n");
 	return;		
