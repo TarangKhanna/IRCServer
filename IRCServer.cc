@@ -339,8 +339,9 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     }
     
     HashTableVoid h;
-    h.insertItem("Rachael", (void*)8);
     cout << "Tarang";
+    bool e = h.insertItem("Rachael", (void*)8);
+     cout << e;
     //void * gradev;
     //char * grade;
     //h.find("Rachael",&gradev);
