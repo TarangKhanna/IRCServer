@@ -341,10 +341,10 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     // below is with hashtable 
     HashTableVoid h; // for storing username and password together
     h.insertItem("Monica", (void*)"passWORDDDD");
-    void * gradev;
-    char * grade;
-    h.find("Rachael",&gradev);
-    cout << "Taran" << (char *)gradev; 
+    //void * gradev;
+    //char * grade;
+    //h.find("Rachael",&gradev);
+    //cout << "Taran" << (char *)gradev; 
     // HashTableVoid h2; // for Room and username
     // first node is username key and data is room no. second node is message and room number.
     void * pass;
