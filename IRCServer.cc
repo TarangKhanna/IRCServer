@@ -341,7 +341,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     HashTableVoid h;
     cout << "Tarang";
     bool e = h.insertItem("Rachael", (void*)8);
-     cout << e;
+    cout << e;
     //void * gradev;
     //char * grade;
     //h.find("Rachael",&gradev);
@@ -410,6 +410,26 @@ IRCServer::getAllUsers(int fd, const char * user, const char * password,const  c
 {
    // read from user.txt
 	// checkpassword 
-	
+	const char * send1 =  "Getting USERS\r\n";
+    write(fd, send1, strlen(send1));
+	userFile.open(PASSWORD_FILE);
+	string line;
+	string pass[10000];
+    int n;
+	if (userFile.is_open())
+     {
+		while (getline(userFile, line)) // separated by \n
+		{
+            stringstream ss;
+            ss << line << "\r\n";
+            string s = ss.str();
+			const char * msg = s.c_str();
+			write(fd, msg, strlen(msg));
+		}
+		userFile.close();
+    }
+	else {
+		cout << "Can't read file\n";
+	}
 }
 
