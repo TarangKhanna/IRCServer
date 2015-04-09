@@ -311,6 +311,7 @@ IRCServer::initialize()
 bool
 IRCServer::checkPassword(int fd, const char * user, const char * password) {
 	// Here check the password--find user and see if correct password 
+    
 	return true;
 }
 
@@ -327,7 +328,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
       passFile.close();
     } else {
       cout << "Can't read file\n";
-    }
+    } // adding pass to file
     userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
     if (userFile.is_open())
     {
@@ -336,9 +337,14 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     } else {
       cout << "Can't read file\n";
     }
+    
     // below is with hashtable 
     HashTableVoid h; // for storing username and password together
-    
+    h.insertItem("Monica", (void*)"passWORDDDD");
+    void * gradev;
+    char * grade;
+    h.find("Rachael",&gradev);
+    cout << "Taran" << (char *)gradev; 
     // HashTableVoid h2; // for Room and username
     // first node is username key and data is room no. second node is message and room number.
     void * pass;
