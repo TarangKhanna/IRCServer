@@ -341,6 +341,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     // below is with hashtable 
     HashTableVoid h; // for storing username and password together
     h.insertItem("Monica", (void*)"passWORDDDD");
+    cout << "Tarang";
     //void * gradev;
     //char * grade;
     //h.find("Rachael",&gradev);
