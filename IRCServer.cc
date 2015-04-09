@@ -338,9 +338,10 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
       cout << "Can't read file\n";
     }
     
-    // below is with hashtable 
-    HashTableVoid h; // for storing username and password together
-    h.insertItem("Monica", (void*)"passWORDDDD");
+    HashTableVoid h;
+    bool e;
+    e = h.insertItem("Rachael", (void*)8);
+    assert(!e);
     cout << "Tarang";
     //void * gradev;
     //char * grade;
