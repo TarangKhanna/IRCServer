@@ -410,8 +410,9 @@ IRCServer::getAllUsers(int fd, const char * user, const char * password,const  c
 {
    // read from user.txt
 	// checkpassword 
-	const char * send1 =  "Getting USERS\r\n";
-    write(fd, send1, strlen(send1));
+	//const char * send1 =  "Getting USERS\r\n";
+    //write(fd, send1, strlen(send1));
+    
 	userFile.open(USER_FILE);
 	string line;
 	string pass[10000];
