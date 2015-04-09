@@ -410,24 +410,6 @@ IRCServer::getAllUsers(int fd, const char * user, const char * password,const  c
 {
    // read from user.txt
 	// checkpassword 
-	userFile.open(PASSWORD_FILE);
-	string line;
-	string pass[10000];
-    int n;
-	if (userFile.is_open())
-     {
-		while (getline(userFile, line)) // separated by \n
-		{
-            stringstream ss;
-            ss << line << "\r\n";
-            string s = ss.str();
-			const char * msg = s.c_str();
-			write(fd, msg, strlen(msg));
-		}
-		userFile.close();
-    }
-	else {
-		cout << "Can't read file\n";
-	}
+	
 }
 
