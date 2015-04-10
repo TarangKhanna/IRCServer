@@ -347,7 +347,7 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 		}
 		passFile.close();
     } 
-	return true;
+	return false;
 }
 
 void
@@ -461,10 +461,6 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
 void
 IRCServer::getAllUsers(int fd, const char * user, const char * password,const  char * args)
 {
-   // read from user.txt
-	// checkpassword 
-	//const char * send1 =  "Getting USERS\r\n";
-    //write(fd, send1, strlen(send1));
   if(checkPassword(fd, user, password)) {
 	userFile.open(USER_FILE);
 	string line;
