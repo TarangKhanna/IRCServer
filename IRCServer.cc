@@ -378,7 +378,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
       cout << "DENY!";
       if(strcmp((char *) pass, password) == 0) { // user found check pass -- still deny add
         const char * msg =  "DENIED FROM HASHTABLE found but wrong pass\r\n";
-	    write(fd, msg, strlen(msg));
+	    write(fd, msg, strlen(msg)); 
       } else {
         const char * msg =  "DENIED FROM HASHTABLE\r\n";
 	    write(fd, msg, strlen(msg));
