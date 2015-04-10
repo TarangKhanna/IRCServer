@@ -360,7 +360,8 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     
     HashTableVoid h; // room 1
     cout << "Tarang";
-   
+    bool e = h.insertItem(user, (void*)"");
+    cout << e;
     //void * gradev;
     //char * grade;
     //h.find("Rachael",&gradev);
@@ -369,7 +370,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     // first node is username key and data is room no. second node is message and room number.
     void * pass;
     if(!h.find(user,&pass)) { // pointer to pointer- password stored here if found
-      h.insertItem(user,(void *)password); // not found- add
+      h.insertItem(user,(void *)""); // not found- add
 	  const char * msg =  "OK FROM HASHTABLE\r\n";
 	  write(fd, msg, strlen(msg)); // to telnet
       cout << "HASHTABLE ADDED!";
@@ -377,14 +378,12 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
       cout << "DENY!";
       if(strcmp((char *) pass, password) == 0) { // user found check pass -- still deny add
         const char * msg =  "DENIED FROM HASHTABLE found but wrong pass\r\n";
-	    write(fd, msg, strlen(msg)); 
+	    write(fd, msg, strlen(msg));
       } else {
         const char * msg =  "DENIED FROM HASHTABLE\r\n";
 	    write(fd, msg, strlen(msg));
       }
     }
-    bool e = h.insertItem(user, (void*)"");
-    cout << e;
 	return;		
 }
 
