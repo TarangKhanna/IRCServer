@@ -337,7 +337,23 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     } else {
       cout << "Can't read file\n";
     }
-    
+    userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
+    if (userFile.is_open())
+     {
+        string line;
+		while (getline(userFile, line)) // separated by \n
+		{
+            string str13(user);
+            if(line.compare(str13) == 0) {
+               const char * msg =  "DENIED\r\n";
+	           write(fd, msg, strlen(msg));
+            } else {
+			   const char * msg = "OK\r\n";
+			   write(fd, msg, strlen(msg));
+          }
+		}
+		userFile.close();
+    }
     HashTableVoid h; // room 1
     cout << "Tarang";
     bool e = h.insertItem(user, (void*)"");
