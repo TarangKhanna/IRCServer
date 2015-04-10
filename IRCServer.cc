@@ -399,6 +399,14 @@ void
 IRCServer::createRoom(int fd, const char * user, const char * password, const char * args)
 {
     HashTableVoid h; // room 1
+    void * gradev;
+    char * grade;
+    bool e;
+    h.insertItem(user,(void *)"tarang");
+    e = h.find(user,&gradev);
+    grade = (char *)gradev;
+    assert(e);
+    assert(strcmp(grade,"tarang"));
     void * pass;
     if((!h.insertItem(user,(void *)""))) { 
       //h.insertItem(user,(void *)""); // not found- add
