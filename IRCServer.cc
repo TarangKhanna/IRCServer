@@ -360,8 +360,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     
     HashTableVoid h; // room 1
     cout << "Tarang";
-    bool e = h.insertItem(user, (void*)"");
-    cout << e;
+   
     //void * gradev;
     //char * grade;
     //h.find("Rachael",&gradev);
@@ -384,6 +383,8 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 	    write(fd, msg, strlen(msg));
       }
     }
+    bool e = h.insertItem(user, (void*)"");
+    cout << e;
 	return;		
 }
 
