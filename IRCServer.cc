@@ -465,7 +465,7 @@ IRCServer::getAllUsers(int fd, const char * user, const char * password,const  c
 	// checkpassword 
 	//const char * send1 =  "Getting USERS\r\n";
     //write(fd, send1, strlen(send1));
-    
+  if(checkPassword(fd, user, password)) {
 	userFile.open(USER_FILE);
 	string line;
 	string pass[10000];
@@ -483,7 +483,11 @@ IRCServer::getAllUsers(int fd, const char * user, const char * password,const  c
 		userFile.close();
     }
 	else {
-		cout << "Can't read file\n";
-	}
+	 	cout << "Can't read file\n";
+	} 
+  } else {
+        const char * msg =  "DENIED\r\n";
+	    write(fd, msg, strlen(msg));
+  }
 }
 
