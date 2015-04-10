@@ -318,11 +318,8 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 void
 IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
-    // unique name--checkPassword
-    // user object create -hashtable
-    // use hastable with file
-    userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
-    if (userFile.is_open())
+    userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
+    if (userFile.is_open()) // check users
      {
         string line;
         int count = 0;
@@ -333,7 +330,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
                count++;
             }
 		}
-        if(count >0 ) {
+        if(count > 0) {
                const char * msg =  "DENIED\r\n";
 	           write(fd, msg, strlen(msg));
         } else {
@@ -341,7 +338,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 			   write(fd, msg, strlen(msg));
         }
 		userFile.close();
-    }
+    } 
     const char * msg1 = "THATS ALL!\r\n";
 	write(fd, msg1, strlen(msg1));
     passFile.open(PASSWORD_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
@@ -374,16 +371,16 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     void * pass;
     if(!h.find(user,&pass)) { // pointer to pointer- password stored here if found
       h.insertItem(user,(void *)password); // not found- add
-	  const char * msg =  "OK\r\n";
+	  const char * msg =  "OK FROM HASHTABLE\r\n";
 	  write(fd, msg, strlen(msg)); // to telnet
       cout << "HASHTABLE ADDED!";
     } else {
       cout << "DENY!";
       if(strcmp((char *) pass, password) == 0) { // user found check pass -- still deny add
-        const char * msg =  "DENIED\r\n";
+        const char * msg =  "DENIED FROM HASHTABLE found but wrong pass\r\n";
 	    write(fd, msg, strlen(msg));
       } else {
-        const char * msg =  "DENIED\r\n";
+        const char * msg =  "DENIED FROM HASHTABLE\r\n";
 	    write(fd, msg, strlen(msg));
       }
     }
