@@ -392,19 +392,19 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     } else {
       cout << "Can't read file\n";
     }
+	return;		
+}
+
+void
+IRCServer::createRoom(int fd, const char * user, const char * password, const char * args)
+{
     HashTableVoid h; // room 1
-    //void * gradev;
-    //char * grade;
-    //h.find("Rachael",&gradev);
-    //cout << "Taran" << (char *)gradev; 
-    // HashTableVoid h2; // for Room and username
-    // first node is username key and data is room no. second node is message and room number.
     void * pass;
-    if((!h.insertItem(user,(void *)""))) { // pointer to pointer- password stored here if found
+    if((!h.insertItem(user,(void *)""))) { 
       //h.insertItem(user,(void *)""); // not found- add
 	  const char * msg =  "OK FROM HASHTABLE\r\n";
 	  write(fd, msg, strlen(msg)); // to telnet
-      cout << "HASHTABLE ADDED!";
+      cout << "HASHTABLE ADDED!" << user ;
     } else {
       cout << "DENY!";
       const char * msg =  "DENIED2 FROM HASHTABLE found but wrong pass\r\n";
@@ -417,45 +417,66 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 	    write(fd, msg, strlen(msg));
       }
     }
-	return;		
-}
-
-void
-IRCServer::createRoom(int fd, const char * user, const char * password, const char * args)
-{
-	// create room object 
 }
 
 void
 IRCServer::listRoom(int fd, const char * user, const char * password, const char * args)
 {
-	// create room object 
+  if(checkPassword(fd, user, password)) {
+  } else {
+        const char * msg =  "DENIED\r\n";
+	    write(fd, msg, strlen(msg));
+  }
 }
 
 void
 IRCServer::enterRoom(int fd, const char * user, const char * password, const char * args)
 {
-	// create room object 
+  if(checkPassword(fd, user, password)) {
+  } else {
+        const char * msg =  "DENIED\r\n";
+	    write(fd, msg, strlen(msg));
+  } 
 }
 
 void
 IRCServer::leaveRoom(int fd, const char * user, const char * password, const char * args)
-{
+{ 
+   if(checkPassword(fd, user, password)) {
+  } else {
+        const char * msg =  "DENIED\r\n";
+	    write(fd, msg, strlen(msg));
+  }
 }
 
 void
 IRCServer::sendMessage(int fd, const char * user, const char * password, const char * args)
 {
+   if(checkPassword(fd, user, password)) {
+  } else {
+        const char * msg =  "DENIED\r\n";
+	    write(fd, msg, strlen(msg));
+  }
 }
 
 void
 IRCServer::getMessages(int fd, const char * user, const char * password, const char * args)
 {
+   if(checkPassword(fd, user, password)) {
+  } else {
+        const char * msg =  "DENIED\r\n";
+	    write(fd, msg, strlen(msg));
+  }
 }
 
 void
 IRCServer::getUsersInRoom(int fd, const char * user, const char * password, const char * args)
 {
+   if(checkPassword(fd, user, password)) {
+  } else {
+        const char * msg =  "DENIED\r\n";
+	    write(fd, msg, strlen(msg));
+  }
 }
 
 void
