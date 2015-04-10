@@ -325,16 +325,20 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     if (userFile.is_open())
      {
         string line;
+        int count = 0;
 		while (getline(userFile, line)) // separated by \n
 		{
             string str13(user);
-            if(line.compare(str13) == 0) {
+            if(line.compare(str13) == 0) { 
+               count++;
+            }
+            if(count >0 ) {
                const char * msg =  "DENIED\r\n";
 	           write(fd, msg, strlen(msg));
             } else {
-			   const char * msg = "OK\r\n";
+	     	   const char * msg = "OK\r\n";
 			   write(fd, msg, strlen(msg));
-          }
+            }
 		}
 		userFile.close();
     }
