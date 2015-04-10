@@ -332,14 +332,14 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
             if(line.compare(str13) == 0) { 
                count++;
             }
-            if(count >0 ) {
+		}
+        if(count >0 ) {
                const char * msg =  "DENIED\r\n";
 	           write(fd, msg, strlen(msg));
-            } else {
+        } else {
 	     	   const char * msg = "OK\r\n";
 			   write(fd, msg, strlen(msg));
-            }
-		}
+        }
 		userFile.close();
     }
     const char * msg1 = "THATS ALL!\r\n";
