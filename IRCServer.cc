@@ -357,9 +357,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     } else {
       cout << "Can't read file\n";
     }
-    
     HashTableVoid h; // room 1
-    
     //void * gradev;
     //char * grade;
     //h.find("Rachael",&gradev);
@@ -367,13 +365,15 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     // HashTableVoid h2; // for Room and username
     // first node is username key and data is room no. second node is message and room number.
     void * pass;
-    if(!h.find(user,&pass)) { // pointer to pointer- password stored here if found
-      h.insertItem(user,(void *)""); // not found- add
+    if((!h.insertItem(user,(void *)""))) { // pointer to pointer- password stored here if found
+      //h.insertItem(user,(void *)""); // not found- add
 	  const char * msg =  "OK FROM HASHTABLE\r\n";
 	  write(fd, msg, strlen(msg)); // to telnet
       cout << "HASHTABLE ADDED!";
     } else {
       cout << "DENY!";
+      const char * msg =  "DENIED2 FROM HASHTABLE found but wrong pass\r\n";
+	  write(fd, msg, strlen(msg));
       if(strcmp((char *) pass, password) == 0) { // user found check pass -- still deny add
         const char * msg =  "DENIED FROM HASHTABLE found but wrong pass\r\n";
 	    write(fd, msg, strlen(msg));
@@ -382,7 +382,6 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 	    write(fd, msg, strlen(msg));
       }
     }
-    
 	return;		
 }
 
