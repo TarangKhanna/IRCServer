@@ -399,18 +399,18 @@ void
 IRCServer::createRoom(int fd, const char * user, const char * password, const char * args)
 {
     HashTableVoid h; // room 1
-    void * gradev;
+    void * pass;
     //char * grade;
     bool e; 
     h.insertItem(user,(void *)password);
-    e = h.find(user,&gradev);
+    e = h.find(user,&pass);
     //grade = (char *)gradev;
-    cout < (char *) gradev;
-    cout < password;
-    assert(e);
-    assert(strcmp((char *)gradev,password));
+    printf("HERE %s",(char *) pass);
+    printf("HERE2 %s",password);
+    //assert(e);
+    assert(strcmp((char *)pass,password));
     
-    void * pass;
+   // void * pass;
     if((!h.insertItem(user,(void **)""))) { 
       //h.insertItem(user,(void *)""); // not found- add
 	  const char * msg =  "OK FROM HASHTABLE\r\n";
