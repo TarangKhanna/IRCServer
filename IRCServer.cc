@@ -408,7 +408,7 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
     printf("HERE %s\n",(char *) pass);
     printf("HERE2 %s\n",password);
     //assert(e);
-    assert(strcmp((char *)pass,password));
+    assert(strcmp((char *)pass,password) == 0);
     
    // void * pass;
     if((!h.insertItem(user,(void **)""))) { 
