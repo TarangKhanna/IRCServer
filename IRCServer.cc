@@ -405,8 +405,11 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
     h.insertItem(user,(void *)password);
     e = h.find(user,&gradev);
     //grade = (char *)gradev;
+    cout < (char *) gradev;
+    cout < password;
     assert(e);
     assert(strcmp((char *)gradev,password));
+    
     void * pass;
     if((!h.insertItem(user,(void **)""))) { 
       //h.insertItem(user,(void *)""); // not found- add
