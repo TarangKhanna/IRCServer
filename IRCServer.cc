@@ -321,22 +321,6 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     // unique name--checkPassword
     // user object create -hashtable
     // use hastable with file
-    passFile.open(PASSWORD_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
-    if (passFile.is_open())
-    {
-      passFile<< password << '\n';
-      passFile.close();
-    } else {
-      cout << "Can't read file\n";
-    } // adding pass to file
-    userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
-    if (userFile.is_open())
-    {
-      userFile<< user << '\n';
-      userFile.close();
-    } else {
-      cout << "Can't read file\n";
-    }
     userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
     if (userFile.is_open())
      {
@@ -354,6 +338,25 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 		}
 		userFile.close();
     }
+    const char * msg1 = "THATS ALL!\r\n";
+	write(fd, msg1, strlen(msg1));
+    passFile.open(PASSWORD_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
+    if (passFile.is_open())
+    {
+      passFile<< password << '\n';
+      passFile.close();
+    } else {
+      cout << "Can't read file\n";
+    } // adding pass to file
+    userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
+    if (userFile.is_open())
+    {
+      userFile<< user << '\n';
+      userFile.close();
+    } else {
+      cout << "Can't read file\n";
+    }
+    
     HashTableVoid h; // room 1
     cout << "Tarang";
     bool e = h.insertItem(user, (void*)"");
