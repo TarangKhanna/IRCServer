@@ -40,8 +40,11 @@ using namespace std;
 int QueueLength = 5;
 fstream passFile;
 fstream userFile;
-HashTableVoid *h = (HashTableVoid*) malloc(sizeof(HashTableVoid)*100); 
-
+fstream roomFile;
+HashTableVoid *h = (HashTableVoid*) malloc(sizeof(HashTableVoid)*10); 
+int hTableCount = 0; // keep track of how many rooms and when to realloc
+int hTableMax = 10;
+int bucketCount = 0;
 int
 IRCServer::open_server_socket(int port) {
 
@@ -400,13 +403,26 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 void
 IRCServer::createRoom(int fd, const char * user, const char * password, const char * args)
 {
-
-    HashTableVoid h; // new room
+    // also add room to file
+    //bucketCount;
+    //h[hTableCount] = ; // new room 
+    if(hTableCount > hTableMax) {
+       // realloc 
+    }
+    roomFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
+    if (userFile.is_open())
+    {
+      roomFile<< args << '\n';
+      roomFile.close();
+    } else {
+      cout << "Can't read file\n";
+    }
+    // = hasher.hash(args); // hash func to convert room to an int 
     void * pass;
     bool e; 
-    h.insertItem(user,(void *)password);
-    e = h.find(user,&pass);
-    
+    //h[t].insertItem(message,(void *)user);
+    //e = h[t].find(user,&pass);
+    hTableCount++; // at end
 }
 
 void

@@ -39,8 +39,8 @@ bool HashTableVoid::insertItem( const char * key, void * data)
    if (!strcmp(entry->_key, key)) { // Entry found
      entry->_data = data;
    return true;
-  }
-  entry = entry->_next;
+   }
+   entry = entry->_next;
   }
   // Entry not found. Add it.
   entry = new HashTableVoidEntry;
