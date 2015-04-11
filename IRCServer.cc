@@ -420,21 +420,20 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
 	     	   const char * msg = "OK\r\n";
 			   write(fd, msg, strlen(msg));
 			   hTableCount++; 
-    if(hTableCount > hTableMax) {
+               if(hTableCount > hTableMax) {
        // realloc 
-    }
-    roomFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
-    if (userFile.is_open())
-    {
-      roomFile << args << '\n';
-      roomFile.close();
-    } else {
-      cout << "Can't read file\n";
-    }
+			    }
+			   roomFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
+			   if (roomFile.is_open()) {
+			     roomFile << args << '\n';
+		         roomFile.close();
+		         } else {
+			     cout << "Can't read file\n";
+		         }
 		       }
-		userFile.close();
-    }
-	return;		
+     		   roomFile.close();
+	   }
+       return;		
     
     //void * pass;
     //bool e; 
@@ -447,6 +446,25 @@ void
 IRCServer::listRoom(int fd, const char * user, const char * password, const char * args)
 {
   if(checkPassword(fd, user, password)) {
+	roomFile.open(USER_FILE);
+	string line;
+	string pass[1000];
+    int n;
+	if (roomFile.is_open())
+     {
+		while (getline(roomFile, line)) // separated by \n
+		{
+            stringstream ss;
+            ss << line << "\r\n";
+            string s = ss.str();
+			const char * msg = s.c_str();
+			write(fd, msg, strlen(msg));
+		}
+		roomFile.close();
+    }
+	else {
+	 	cout << "Can't read file\n";
+	} 
   } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
@@ -509,7 +527,7 @@ IRCServer::getAllUsers(int fd, const char * user, const char * password,const  c
   if(checkPassword(fd, user, password)) {
 	userFile.open(USER_FILE);
 	string line;
-	string pass[10000];
+	string pass[1000];
     int n;
 	if (userFile.is_open())
      {
