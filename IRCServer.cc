@@ -394,30 +394,48 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 			    }
 		       }
 		userFile.close();
-    } 
-    const char * msg1 = "THATS ALL!\r\n";
-	write(fd, msg1, strlen(msg1));
+    }
 	return;		
 }
 
 void
 IRCServer::createRoom(int fd, const char * user, const char * password, const char * args)
 {
-    
-    //h[hTableCount] = ; // new room 
-    hTableCount++; 
+    roomFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
+    if (roomFile.is_open()) // check rooms
+     {
+        string line;
+        int count = 0;
+		while (getline(roomFile, line)) // separated by \n
+		{
+            string str13(args);
+            if(line.compare(str13) == 0) { 
+               count++;
+            }
+		}
+        if(count > 0) {
+               const char * msg =  "DENIED\r\n";
+	           write(fd, msg, strlen(msg));
+        } else {
+	     	   const char * msg = "OK\r\n";
+			   write(fd, msg, strlen(msg));
+			   hTableCount++; 
     if(hTableCount > hTableMax) {
        // realloc 
     }
     roomFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
     if (userFile.is_open())
     {
-      roomFile<< args << '\n';
+      roomFile << args << '\n';
       roomFile.close();
     } else {
       cout << "Can't read file\n";
     }
-    // = hasher.hash(args); // hash func to convert room to an int 
+		       }
+		userFile.close();
+    }
+	return;		
+    
     //void * pass;
     //bool e; 
     //h[t].insertItem(message,(void *)user);
