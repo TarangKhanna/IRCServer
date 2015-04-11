@@ -2,7 +2,7 @@
 // Data structs for a list of ints
 
 struct ListNode {
-	int value;
+	void * value;
 	struct ListNode * next;
 };
 
@@ -16,10 +16,10 @@ typedef struct LinkedList LinkedList;
 
 void llist_init(LinkedList * list);
 void llist_print(LinkedList * list);
-void llist_add(LinkedList * list, int value);
-int llist_exists(LinkedList * list, int value);
-int llist_remove(LinkedList * list, int value);
-int llist_get_ith(LinkedList * list, int ith, int *value);
+void llist_add(LinkedList * list, void * value);
+int llist_exists(LinkedList * list, void * value);
+int llist_remove(LinkedList * list, void * value);
+int llist_get_ith(LinkedList * list, int ith, void **value);
 int llist_remove_ith(LinkedList * list, int ith);
 int llist_number_elements(LinkedList * list);
 int llist_save(LinkedList * list, char * file_name);

@@ -42,7 +42,7 @@ void llist_print(LinkedList * list) {
 //
 // Appends a new node with this value at the beginning of the list
 //
-void llist_add(LinkedList * list, int value) {
+void llist_add(LinkedList * list, void * value) {
 	// Create new node
 	ListNode * n = (ListNode *) malloc(sizeof(ListNode));
 	n->value = value;
@@ -55,7 +55,7 @@ void llist_add(LinkedList * list, int value) {
 //
 // Returns true if the value exists in the list.
 //
-int llist_exists(LinkedList * list, int value) {
+int llist_exists(LinkedList * list, void * value) {
     
     ListNode * e;
 
@@ -80,7 +80,7 @@ int llist_exists(LinkedList * list, int value) {
 //
 // It removes the entry with that value in the list.
 //
-int llist_remove(LinkedList * list, int value) {
+int llist_remove(LinkedList * list, void * value) {
     ListNode * e;
 
 	if (list->head == NULL) {
@@ -106,7 +106,7 @@ int llist_remove(LinkedList * list, int value) {
 // It stores in *value the value that correspond to the ith entry.
 // It returns 1 if success or 0 if there is no ith entry.
 //
-int llist_get_ith(LinkedList * list, int ith, int * value) {
+int llist_get_ith(LinkedList * list, int ith, void ** value) {
     int counter = 0; // use counter 
     ListNode * e;
 

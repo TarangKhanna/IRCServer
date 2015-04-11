@@ -35,7 +35,6 @@ const char * usage =
 #include <fstream>
 #include "IRCServer.h"
 #include "HashTableVoid.h"
-#include "LinkedList.h"
 using namespace std;
 
 int QueueLength = 5;
@@ -355,7 +354,7 @@ void
 IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
     userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
-    if (userFile.is_open()) // check users
+    if (userFile.is_open()) // check if user already exists
      {
         string line;
         int count = 0;
