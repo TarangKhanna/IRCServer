@@ -473,8 +473,28 @@ IRCServer::listRoom(int fd, const char * user, const char * password, const char
 
 void
 IRCServer::enterRoom(int fd, const char * user, const char * password, const char * args)
-{
+{ // relate room to array index
   if(checkPassword(fd, user, password)) {
+  	int roomCount = 0; // this is the number h[roomCount]
+  	// h[0] is the first room- which is also the first room in the file
+  	roomFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
+    if (roomFile.is_open()) // check users
+     {
+        string line;
+		while (getline(roomFile, line)) // separated by \n
+		{
+            string str13(user);
+            if(line.compare(str13) == 0) { 
+               break;
+            }
+            roomCount++; 
+		}
+		roomFile.close();
+    } 
+    //h[roomCount].insertItem(message,(void *)user); // for message and pass
+    //h2[roomCount].insertItem(user,(void *)password); // hashtable for users and pass
+
+
   } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
