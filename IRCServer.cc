@@ -376,36 +376,36 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
         } else {
 	     	   const char * msg = "OK\r\n";
 			   write(fd, msg, strlen(msg));
-        }
+			   passFile.open(PASSWORD_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
+               if (passFile.is_open())
+               {
+			      passFile << password << '\n';
+			      passFile.close();
+			    } else {
+			      cout << "Can't read file\n";
+			    } // adding pass to file
+			    userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
+			    if (userFile.is_open())
+			    {
+			      userFile<< user << '\n';
+			      userFile.close();
+			    } else {
+			      cout << "Can't read file\n";
+			    }
+		       }
 		userFile.close();
     } 
     const char * msg1 = "THATS ALL!\r\n";
 	write(fd, msg1, strlen(msg1));
-    passFile.open(PASSWORD_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
-    if (passFile.is_open())
-    {
-      passFile<< password << '\n';
-      passFile.close();
-    } else {
-      cout << "Can't read file\n";
-    } // adding pass to file
-    userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
-    if (userFile.is_open())
-    {
-      userFile<< user << '\n';
-      userFile.close();
-    } else {
-      cout << "Can't read file\n";
-    }
 	return;		
 }
 
 void
 IRCServer::createRoom(int fd, const char * user, const char * password, const char * args)
 {
-    // also add room to file
-    //bucketCount;
+    
     //h[hTableCount] = ; // new room 
+    hTableCount++; 
     if(hTableCount > hTableMax) {
        // realloc 
     }
@@ -418,11 +418,11 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
       cout << "Can't read file\n";
     }
     // = hasher.hash(args); // hash func to convert room to an int 
-    void * pass;
-    bool e; 
+    //void * pass;
+    //bool e; 
     //h[t].insertItem(message,(void *)user);
     //e = h[t].find(user,&pass);
-    hTableCount++; // at end
+    // at end
 }
 
 void
