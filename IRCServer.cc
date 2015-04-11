@@ -40,6 +40,8 @@ using namespace std;
 int QueueLength = 5;
 fstream passFile;
 fstream userFile;
+HashTableVoid *h = (HashTableVoid*) malloc(sizeof(HashTableVoid)*100); 
+
 int
 IRCServer::open_server_socket(int port) {
 
@@ -354,7 +356,7 @@ void
 IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
     userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
-    if (userFile.is_open()) // check if user already exists
+    if (userFile.is_open()) // check users
      {
         string line;
         int count = 0;
@@ -398,29 +400,13 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 void
 IRCServer::createRoom(int fd, const char * user, const char * password, const char * args)
 {
-    HashTableVoid h;
+
+    HashTableVoid h; // new room
     void * pass;
     bool e; 
     h.insertItem(user,(void *)password);
     e = h.find(user,&pass);
-    //assert(strcmp((char *)pass,password) == 0);
-    if((!h.insertItem(user,(void **)""))) { 
-      //h.insertItem(user,(void *)""); // not found- add
-	  const char * msg =  "OK FROM HASHTABLE\r\n";
-	  write(fd, msg, strlen(msg)); // to telnet
-      cout << "HASHTABLE ADDED!" << user ;
-    } else {
-      cout << "DENY!";
-      const char * msg =  "DENIED2 FROM HASHTABLE found but wrong pass\r\n";
-	  write(fd, msg, strlen(msg));
-      if(strcmp((char *) pass, password) == 0) { // user found check pass -- still deny add
-        const char * msg =  "DENIED FROM HASHTABLE found but wrong pass\r\n";
-	    write(fd, msg, strlen(msg));
-      } else {
-        const char * msg =  "DENIED FROM HASHTABLE\r\n";
-	    write(fd, msg, strlen(msg));
-      }
-    }
+    
 }
 
 void
