@@ -35,6 +35,7 @@ const char * usage =
 #include <fstream>
 #include "IRCServer.h"
 #include "HashTableVoid.h"
+#include "LinkedList.h"
 using namespace std;
 
 int QueueLength = 5;
