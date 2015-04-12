@@ -151,10 +151,10 @@ bool HashTableVoidIterator::next(const char * & key, void * & data)
 // to iterate over merely the linked list- bucket = 0 
 void HashTableVoidIterator::next2(const char * & key, void * & data)
 {
-  if(_currentEntry != NULL) { 
+  while(_currentEntry != NULL) { 
         //printf("_currentBucket: %d at %s HERE\n",(int*)_currentEntry->_data,_currentEntry->_key);
-        data = _currentEntry->_data;
-        key = _currentEntry->_key;
+        data = _currentEntry->_data; // user
+        key = _currentEntry->_key; // message 
         _currentEntry = _hashTable->_buckets[_currentBucket];
         return;
   }

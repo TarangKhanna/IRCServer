@@ -288,9 +288,7 @@ IRCServer::processRequest( int fd )
 void
 IRCServer::initialize()
 {
-	// FILE *fp = fopen(PASSWORD_FILE,"a+"); // Open password file-- fopen PASSWORD_FILE
     printf("Initialize\n");
-    //fstream passFile;
     passFile.open(PASSWORD_FILE);
     string line;
     string pass[10000];
@@ -545,17 +543,38 @@ void
 IRCServer::getMessages(int fd, const char * user, const char * password, const char * args)
 {
    if(checkPassword(fd, user, password)) {
+  	int roomCount = 0; // this is the number h[roomCount]
+  	// h[0] is the first room- which is also the first room in the file
+  	roomFile.open(ROOM_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
+    if (roomFile.is_open()) // check room
+     {
+        string line;
+		while (getline(roomFile, line)) // separated by \n
+		{
+            string str13(args);
+            if(line.compare(str13) == 0) { 
+               break;
+            }
+            roomCount++; 
+		}
+		roomFile.close();
+    } 
+    HashTableVoidIterator iterator(&h[roomCount]);
+    const char * key;
+    void * gradev;
+    iterator.next(key, gradev);
+    // print key which is message
   } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
-  }
+  } 
 }
 
 void
 IRCServer::getUsersInRoom(int fd, const char * user, const char * password, const char * args)
 {
    if(checkPassword(fd, user, password)) {
-  } else {
+   } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
   }
