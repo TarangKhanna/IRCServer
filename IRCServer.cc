@@ -382,6 +382,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
          if(userVec[i].compare(str13) == 0) { // DENY
          	const char * msg =  "DENIED\r\n";
 	        write(fd, msg, strlen(msg));
+            return;
          } else {
 	     	   const char * msg = "OK\r\n";
 			   write(fd, msg, strlen(msg));
@@ -403,6 +404,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 			    } else {
 			      cout << "Can't read file\n";
 			    }
+                return;
 		     }
          }
          return;
