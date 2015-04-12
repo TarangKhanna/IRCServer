@@ -382,20 +382,12 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     if (userFile.is_open()) // check users
      {
         string line;
-        int count = 0; 
-        const char * msg4 = "FILE OPENED USER";
-	    write(fd, msg4, strlen(msg4));
+        int count = 0;
 		while (getline(userFile, line)) // separated by \n
 		{
             string str13(user);
-            const char * msg3 = "REACHED GETLINE";
-	        write(fd, msg3, strlen(msg3));
-            const char * msg2 = line.c_str();
-	        write(fd, msg2, strlen(msg2));
             if(line.compare(str13) == 0) { 
                count++;
-               const char * msg =  "SAME FOUND\r\n";
-	           write(fd, msg, strlen(msg));
             }
 		}
         if(count > 0) {
