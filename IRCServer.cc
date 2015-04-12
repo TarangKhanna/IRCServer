@@ -386,6 +386,14 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 			    } else {
 			      cout << "Can't read file\n";
 			    } // adding pass to file
+			    userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
+			    if (userFile.is_open())
+			    {
+			      userFile<< user << '\n'; 
+			      userFile.close();
+			    } else {
+			      cout << "Can't read file\n";
+			    }
 		       }
     }
 	return;		
