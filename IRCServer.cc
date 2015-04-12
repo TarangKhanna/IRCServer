@@ -385,6 +385,8 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 		while (getline(userFile, line)) // separated by \n
 		{
             string str13(user);
+            const char * msg3 = "REACHED GETLINE";
+	        write(fd, msg3, strlen(msg3));
             const char * msg2 = line.c_str();
 	        write(fd, msg2, strlen(msg2));
             if(line.compare(str13) == 0) { 
