@@ -387,6 +387,8 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
             string str13(user);
             if(line.compare(str13) == 0) { 
                count++;
+               const char * msg =  "SAME FOUND\r\n";
+	           write(fd, msg, strlen(msg));
             }
 		}
         if(count > 0) {
