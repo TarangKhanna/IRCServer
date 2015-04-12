@@ -42,6 +42,7 @@ fstream passFile;
 fstream userFile;
 fstream roomFile;
 HashTableVoid *h = (HashTableVoid*) malloc(sizeof(HashTableVoid)*10); 
+HashTableVoid *h2 = (HashTableVoid*) malloc(sizeof(HashTableVoid)*10); 
 int hTableCount = 0; // keep track of how many rooms and when to realloc
 int hTableMax = 10;
 int bucketCount = 0;
@@ -494,9 +495,7 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
 		roomFile.close();
     } 
     //h[roomCount].insertItem2(message,(void *)user); // for message and pass
-    //h2[roomCount].insertItem2(user,(void *)password); // hashtable for users and pass
-    
-
+    h2[roomCount].insertItem2(user,(void *)password); // hashtable for users and pass
   } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
@@ -506,7 +505,8 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
 void
 IRCServer::leaveRoom(int fd, const char * user, const char * password, const char * args)
 { 
-   if(checkPassword(fd, user, password)) {
+  if(checkPassword(fd, user, password)) {
+      // h.remove2  
   } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
@@ -576,10 +576,31 @@ void
 IRCServer::getUsersInRoom(int fd, const char * user, const char * password, const char * args)
 {
    if(checkPassword(fd, user, password)) {
-   } else {
+  	int roomCount = 0; // this is the number h[roomCount]
+  	// h[0] is the first room- which is also the first room in the file
+  	roomFile.open(ROOM_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
+    if (roomFile.is_open()) // check room
+     {
+        string line;
+		while (getline(roomFile, line)) // separated by \n
+		{
+            string str13(args);
+            if(line.compare(str13) == 0) { 
+               break;
+            }
+            roomCount++; 
+		}
+		roomFile.close();
+    } 
+    HashTableVoidIterator iterator(&h2[roomCount]); // users and pass table
+    const char * msg;
+    void * gradev;
+    iterator.next(msg, gradev);
+	write(fd, msg, strlen(msg));// print key which is user for h2
+  } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
-  }
+  } 
 }
 
 void
