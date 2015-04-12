@@ -51,5 +51,6 @@ class HashTableVoidIterator {
  public:
   HashTableVoidIterator(HashTableVoid * hashTable);
   bool next(const char * & key, void * & data);
+  void next2(const char * & key, void * & data);
 };
 
