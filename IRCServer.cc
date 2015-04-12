@@ -401,6 +401,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
         if(count > 0) {
                const char * msg =  "DENIED\r\n";
 	           write(fd, msg, strlen(msg));
+               userFile.close(); 
         } else {
 			   userFile.close();
 	     	   const char * msg = "OK\r\n";
