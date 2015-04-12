@@ -374,7 +374,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
                const char * msg =  "DENIED\r\n";
 	           write(fd, msg, strlen(msg));
         } else {
-               userFile<< user << '\n'; 
+               userFile << user << '\n'; 
 			   userFile.close();
 	     	   const char * msg = "OK\r\n";
 			   write(fd, msg, strlen(msg));
@@ -386,14 +386,6 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 			    } else {
 			      cout << "Can't read file\n";
 			    } // adding pass to file
-			    userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
-			    if (userFile.is_open())
-			    {
-			      userFile<< user << '\n'; 
-			      userFile.close();
-			    } else {
-			      cout << "Can't read file\n";
-			    }
 		       }
     }
 	return;		
