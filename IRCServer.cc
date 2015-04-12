@@ -1,4 +1,4 @@
-
+    
 const char * usage =
 "                                                               \n"
 "IRCServer:                                                   \n"
@@ -308,7 +308,7 @@ IRCServer::initialize()
       cout << "Can't read file\n";
     }
     for(int i = 0; i < passVec.size(); i++) {
-      cout << passVec[i] << "Passworddd" << endl;
+      //cout << passVec[i] << "Passworddd" << endl;
     }
     userFile.open(USER_FILE);
     if (userFile.is_open())
@@ -398,6 +398,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
                if (passFile.is_open())
                {
 			      passFile << password << '\n';
+                  passVec.push_back(password);
 			      passFile.close();
 			    } else {
 			      cout << "Can't read file\n";
@@ -406,6 +407,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 			    if (userFile.is_open())
 			    {
 			      userFile<< user << '\n'; 
+                  userVec.push_back(user);
 			      userFile.close();
 			    } else {
 			      cout << "Can't read file\n";
@@ -452,8 +454,7 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
 		       }
      		   roomFile.close();
 	   }
-       return;		
-    
+       return;		    
     //void * pass;
     //bool e; 
     //h[t].insertItem(message,(void *)user);
