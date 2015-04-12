@@ -377,11 +377,14 @@ void
 IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
     userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
+    const char * msg5 = "ENTERED ADD USER";
+	write(fd, msg5, strlen(msg5));
     if (userFile.is_open()) // check users
      {
         string line;
         int count = 0; 
-
+        const char * msg4 = "FILE OPENED USER";
+	    write(fd, msg4, strlen(msg4));
 		while (getline(userFile, line)) // separated by \n
 		{
             string str13(user);
