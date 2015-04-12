@@ -377,7 +377,7 @@ void
 IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
 	for(int i = 0; i < userVec.size(); i++) {
-      cout << userVec[i] << endl;
+      cout << userVec[i] << "HERE MAN" << endl;
       string str13(user);
          if(userVec[i].compare(str13) == 0) { // DENY
          	const char * msg =  "DENIED\r\n";
