@@ -308,7 +308,9 @@ IRCServer::initialize()
       cout << "Can't read file\n";
     }
 	// Initialize users in room
-
+    ofstream ofs; // reset room file
+    ofs.open(ROOM_FILE, std::ofstream::out | std::ofstream::trunc);
+    ofs.close();
 	// Initalize message list
 
 }
@@ -401,7 +403,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 void
 IRCServer::createRoom(int fd, const char * user, const char * password, const char * args)
 {
-    roomFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
+    roomFile.open(ROOM_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
     if (roomFile.is_open()) // check rooms
      {
         string line;
@@ -423,7 +425,7 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
                if(hTableCount > hTableMax) {
        // realloc 
 			    }
-			   roomFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
+			   roomFile.open(ROOM_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
 			   if (roomFile.is_open()) {
 			     roomFile << args << '\n';
 		         roomFile.close();
@@ -446,7 +448,7 @@ void
 IRCServer::listRoom(int fd, const char * user, const char * password, const char * args)
 {
   if(checkPassword(fd, user, password)) {
-	roomFile.open(USER_FILE);
+	roomFile.open(ROOM_FILE);
 	string line;
 	string pass[1000];
     int n;
@@ -477,13 +479,13 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
   if(checkPassword(fd, user, password)) {
   	int roomCount = 0; // this is the number h[roomCount]
   	// h[0] is the first room- which is also the first room in the file
-  	roomFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
-    if (roomFile.is_open()) // check users
+  	roomFile.open(ROOM_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
+    if (roomFile.is_open()) // check room
      {
         string line;
 		while (getline(roomFile, line)) // separated by \n
 		{
-            string str13(user);
+            string str13(args);
             if(line.compare(str13) == 0) { 
                break;
             }
@@ -515,10 +517,28 @@ void
 IRCServer::sendMessage(int fd, const char * user, const char * password, const char * args)
 {
    if(checkPassword(fd, user, password)) {
+  	int roomCount = 0; // this is the number h[roomCount]
+  	// h[0] is the first room- which is also the first room in the file
+  	roomFile.open(ROOM_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
+    if (roomFile.is_open()) // check room
+     {
+        string line;
+		while (getline(roomFile, line)) // separated by \n
+		{
+            string str13(args);
+            if(line.compare(str13) == 0) { 
+               break;
+            }
+            roomCount++; 
+		}
+		roomFile.close();
+    } 
+    h[roomCount].insertItem2(args,(void *)user); // for message and pass
+    //h2[roomCount].insertItem2(user,(void *)password); // hashtable for users and pass
   } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
-  }
+  } 
 }
 
 void
