@@ -308,9 +308,9 @@ IRCServer::initialize()
       cout << "Can't read file\n";
     }
 	// Initialize users in room
-    ofstream ofs; // reset room file
-    ofs.open(ROOM_FILE, std::ofstream::out | std::ofstream::trunc);
-    ofs.close();
+    ofstream resetRoom; // reset room file
+    resetRoom.open(ROOM_FILE, std::ofstream::out | std::ofstream::trunc);
+    resetRoom.close();
 	// Initalize message list
 
 }
