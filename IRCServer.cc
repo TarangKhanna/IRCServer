@@ -376,9 +376,7 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 void
 IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
-    userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
-    const char * msg5 = "ENTERED ADD USER";
-	write(fd, msg5, strlen(msg5));
+    userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
     if (userFile.is_open()) // check users
      {
         string line;
@@ -393,7 +391,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
         if(count > 0) {
                const char * msg =  "DENIED\r\n";
 	           write(fd, msg, strlen(msg));
-               userFile.close(); 
+               userFile.close();  
         } else {
 			   userFile.close();
 	     	   const char * msg = "OK\r\n";
@@ -424,7 +422,6 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 void
 IRCServer::createRoom(int fd, const char * user, const char * password, const char * args)
 {
-   
     roomFile.open(ROOM_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
     if (roomFile.is_open()) // check rooms
      {
