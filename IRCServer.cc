@@ -33,9 +33,11 @@ const char * usage =
 #include <sstream>
 #include <iostream>
 #include <fstream>
+#include <vector>
 #include "IRCServer.h"
 #include "HashTableVoid.h"
 using namespace std;
+
 
 int QueueLength = 5;
 fstream passFile;
@@ -43,6 +45,8 @@ fstream userFile;
 fstream roomFile;
 HashTableVoid *h = (HashTableVoid*) malloc(sizeof(HashTableVoid)*10); 
 HashTableVoid *h2 = (HashTableVoid*) malloc(sizeof(HashTableVoid)*10); 
+vector<string> userVec;
+vector<string> passVec;
 int hTableCount = 0; // keep track of how many rooms and when to realloc
 int hTableMax = 10;
 int bucketCount = 0;
@@ -292,17 +296,29 @@ IRCServer::initialize()
     printf("Initialize\n");
     passFile.open(PASSWORD_FILE);
     string line;
-    string pass[10000];
-    int a = 0;
     if (passFile.is_open())
     {
       while ( getline (passFile,line) ) // separated by \n
         {
-           pass[a] = line;
-           cout << pass[a] << '\n';
-           a++;
+           passVec.push_back(line);
+           cout << line << '\n';
         }
       passFile.close();
+    } else {
+      cout << "Can't read file\n";
+    }
+    for(int i = 0; i < passVec.size(); i++) {
+      cout << passVec[i] << "Passworddd" << endl;
+    }
+    userFile.open(USER_FILE);
+    if (userFile.is_open())
+    {
+      while ( getline (userFile,line) ) // separated by \n
+        {
+           userVec.push_back(line);
+           cout << line << '\n';
+        }
+      userFile.close();
     } else {
       cout << "Can't read file\n";
     }

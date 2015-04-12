@@ -6,6 +6,9 @@
 #define USER_FILE "user.txt"
 #define ROOM_FILE "room.txt"
 //#include "HashTableVoid.h"
+
+
+
 class IRCServer {
 	// Add any variables you need
 
