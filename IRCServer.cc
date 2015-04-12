@@ -376,12 +376,15 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 void
 IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
+    printf("HERE");
 	for(int i = 0; i < userVec.size(); i++) {
       cout << userVec[i] << "HERE MAN" << endl;
       string str13(user);
+      printf("YA");
          if(userVec[i].compare(str13) == 0) { // DENY
          	const char * msg =  "DENIED\r\n";
 	        write(fd, msg, strlen(msg));
+            printf("SAME");
             return;
          } else {
 	     	   const char * msg = "OK\r\n";
