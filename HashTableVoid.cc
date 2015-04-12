@@ -51,6 +51,28 @@ bool HashTableVoid::insertItem( const char * key, void * data)
   return false;
 }
 
+// Mod of the inserItem function earlier to be used in the IrcServer
+bool HashTableVoid::insertItem2( const char * key, void * data)
+{
+  // use first bucket  
+  int h = 0;
+  HashTableVoidEntry * entry = _buckets[h]; 
+  while (entry!=NULL) {
+   if (!strcmp(entry->_key, key)) { // Entry found
+     entry->_data = data;
+   return true;
+   }
+   entry = entry->_next;
+  }
+  // Entry not found. Add it.
+  entry = new HashTableVoidEntry;
+  entry->_key = strdup(key); 
+  entry->_data = data;
+  entry->_next = _buckets[h]; 
+  _buckets[h] = entry;
+  return false;
+}
+
 // Find a key in the dictionary and place in "data" the corresponding record
 // Returns false if key does not exist
 bool HashTableVoid::find( const char * key, void ** data)
@@ -91,6 +113,7 @@ bool HashTableVoid::removeElement(const char * key)
    }
   return false;
 }
+
 
 // Creates an iterator object for this hash table
 HashTableVoidIterator::HashTableVoidIterator(HashTableVoid * hashTable)

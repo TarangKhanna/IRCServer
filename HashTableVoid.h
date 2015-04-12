@@ -32,6 +32,9 @@ class HashTableVoid {
   // Add a record to the hash table. Returns true if key already exists.
   // Substitute content if key already exists.
   bool insertItem( const char * key, void * data);
+  
+  // mod for where ircserver 
+  bool insertItem2( const char * key, void * data);
 
   // Find a key in the dictionary and place in "data" the corresponding record
   // Returns false if key is does not exist
