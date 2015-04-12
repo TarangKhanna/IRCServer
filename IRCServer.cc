@@ -47,6 +47,7 @@ HashTableVoid *h = (HashTableVoid*) malloc(sizeof(HashTableVoid)*10);
 HashTableVoid *h2 = (HashTableVoid*) malloc(sizeof(HashTableVoid)*10); 
 vector<string> userVec;
 vector<string> passVec;
+vector<string> roomVec;
 int hTableCount = 0; // keep track of how many rooms and when to realloc
 int hTableMax = 10;
 int bucketCount = 0;
@@ -446,6 +447,7 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
 			    }
 			   roomFile.open(ROOM_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
 			   if (roomFile.is_open()) {
+                 roomVec.push_back(args);
 			     roomFile << args << '\n';
 		         roomFile.close();
 		         } else {
@@ -533,6 +535,7 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
 void
 IRCServer::sendMessage(int fd, const char * user, const char * password, const char * args)
 {
+   cout << "HERE BRUH "<< args;
    if(checkPassword(fd, user, password)) {
   	int roomCount = 0; // this is the number h[roomCount]
   	// h[0] is the first room- which is also the first room in the file
