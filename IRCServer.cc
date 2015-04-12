@@ -376,23 +376,13 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 void
 IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
-    userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
-    if (userFile.is_open()) // check users
-     {
-        string line;
-        int count = 0; 
-		while (getline(userFile, line)) // separated by \n
-		{
-            string str13(user);
-            if(line.compare(str13) == 0) { 
-               count++;
-            }
-		}
-        if(count > 0) {
-               const char * msg =  "DENIED\r\n";
-	           write(fd, msg, strlen(msg));
-        } else {
-			   userFile.close();
+	for(int i = 0; i < userVec.size(); i++) {
+      cout << userVec[i] << endl;
+      string str13(user);
+         if(userVec[i].compare(str13) == 0) { // DENY
+         	const char * msg =  "DENIED\r\n";
+	        write(fd, msg, strlen(msg));
+         } else {
 	     	   const char * msg = "OK\r\n";
 			   write(fd, msg, strlen(msg));
 			   passFile.open(PASSWORD_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
@@ -413,9 +403,9 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 			    } else {
 			      cout << "Can't read file\n";
 			    }
-		       }
-    }
-	return;		
+		     }
+         }
+         return;
 }
 
 void
@@ -535,7 +525,10 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
 void
 IRCServer::sendMessage(int fd, const char * user, const char * password, const char * args)
 {
-   cout << "HERE BRUH "<< args;
+   char * pRoom;
+   char * message;
+   int nRead = sscanf(args, "%s %s", pRoom, message);
+   cout << "HERE BRUH "<< args << "THEN " <<  pRoom ;
    if(checkPassword(fd, user, password)) {
   	int roomCount = 0; // this is the number h[roomCount]
   	// h[0] is the first room- which is also the first room in the file
