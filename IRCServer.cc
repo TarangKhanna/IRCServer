@@ -362,7 +362,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     if (userFile.is_open()) // check users
      {
         string line;
-        int count = 0;
+        int count = 0; 
 		while (getline(userFile, line)) // separated by \n
 		{
             string str13(user);
@@ -374,7 +374,6 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
                const char * msg =  "DENIED\r\n";
 	           write(fd, msg, strlen(msg));
         } else {
-               //userFile << user << '\n'; 
 			   userFile.close();
 	     	   const char * msg = "OK\r\n";
 			   write(fd, msg, strlen(msg));
@@ -402,6 +401,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
 void
 IRCServer::createRoom(int fd, const char * user, const char * password, const char * args)
 {
+   
     roomFile.open(ROOM_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
     if (roomFile.is_open()) // check rooms
      {
@@ -418,6 +418,7 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
                const char * msg =  "DENIED\r\n";
 	           write(fd, msg, strlen(msg));
         } else {
+               roomFile.close();
 	     	   const char * msg = "OK\r\n";
 			   write(fd, msg, strlen(msg));
 			   hTableCount++; 
