@@ -43,7 +43,7 @@ int QueueLength = 5;
 fstream passFile;
 fstream userFile;
 fstream roomFile;
-HashTableVoid *h = (HashTableVoid*) malloc(sizeof(HashTableVoid)*10); 
+HashTableVoid h;
 HashTableVoid *h2 = (HashTableVoid*) malloc(sizeof(HashTableVoid)*10); 
 vector<string> userVec;
 vector<string> passVec;
@@ -518,8 +518,8 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
 		roomFile.close();
     } 
     //h[roomCount].insertItem2(message,(void *)user); // for message and pass
-    HashTableVoid i;
-    h2[0].insertItem(user,(void *)password); // hashtable for users and pass
+    h.insertItem2(user,(void *)password, roomCount); // hashtable for users and pass
+    bucketCount++;
   } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
@@ -561,7 +561,7 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 		}
 		roomFile.close();
     } 
-    h[roomCount].insertItem2(args,(void *)user, hTableCount); // for message and pass
+    h.insertItem2(args,(void *)user, roomCount); // for message and pass
     //h2[roomCount].insertItem2(user,(void *)password); // hashtable for users and pass
   } else {
         const char * msg =  "DENIED\r\n";
@@ -589,7 +589,7 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
 		}
 		roomFile.close();
     } 
-    HashTableVoidIterator iterator(&h[roomCount]);
+    HashTableVoidIterator iterator(&h);
     const char * key;
     void * gradev;
     iterator.next(key, gradev);
