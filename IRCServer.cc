@@ -327,42 +327,11 @@ IRCServer::initialize()
 bool
 IRCServer::checkPassword(int fd, const char * user, const char * password) {
 	// Here check the password--find user and see if correct password 
-    int countUser = 1;
-    int countPass = 1;
-    // find user
-    userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
-    if (userFile.is_open()) // check users
-     {
-        string line;
-		while (getline(userFile, line)) // separated by \n
-		{
-            string str13(user);
-            if(line.compare(str13) == 0) { 
-               break;
-            }
-            countUser++;
-		}
-		userFile.close();
-    } 
-    // get countUser and iterate thru countPass-passfile 
-    passFile.open(PASSWORD_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
-    if (passFile.is_open()) // check users
-     {
-        string line;
-		while (getline(passFile, line)) 
-		{
-            if(countPass == countUser) {
-               string str13(password);
-               if(line.compare(str13) == 0) { 
-                  return true;
-               } else {
-                  return false;
-               }
-            }
-            countPass++;
-		}
-		passFile.close();
-    } 
+    for(int i = 0; i < passVec.size(); i++) {
+       if(passVec[i] == userVec[i]) {
+         return true;
+       }
+    }
 	return false;
 }
 
