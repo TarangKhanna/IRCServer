@@ -515,7 +515,7 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
     } 
     //h[roomCount].insertItem2(message,(void *)user); // for message and pass
     HashTableVoid i;
-    i.insertItem(user,(void *)password); // hashtable for users and pass
+    h2[0].insertItem(user,(void *)password); // hashtable for users and pass
   } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
