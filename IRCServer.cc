@@ -230,17 +230,6 @@ IRCServer::processRequest( int fd )
 	printf("COMMAND <user> <password> <arguments>. See below.\n");
 	printf("You need to separate the commandLine into those components\n");
 	printf("For now, command, user, and password are hardwired.\n");
-    string s(commandLine);
-	istringstream iss(s);
-	string token;
-	string strings[10];
-	int d = 0; // also number of arguments 
-	while(getline(iss, token, ' ')) // parsing
-	{
-          strings[d] = token;
-	      //cout << strings[d] << endl;
-	      d++;
-	}
     char command1[1025];
 	char user2[1025];
     char password3[1025]; 
@@ -540,10 +529,10 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
 void
 IRCServer::sendMessage(int fd, const char * user, const char * password, const char * args)
 {
-   char * pRoom;
-   char * message;
-   int nRead = sscanf(args, "%s %s", pRoom, message);
-   cout << "HERE BRUH "<< args << "THEN " <<  pRoom ;
+   char pRoom[10];
+   char message[1025];
+   int nRead = sscanf(args,"%s %s", pRoom, message);
+   cout << "HERE BRUH "<< message << "THEN " <<  pRoom ;
    if(checkPassword(fd, user, password)) {
   	int roomCount = 0; // this is the number h[roomCount]
   	// h[0] is the first room- which is also the first room in the file
@@ -561,7 +550,7 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 		}
 		roomFile.close();
     } 
-    h.insertItem2(args,(void *)user, roomCount); // for message and pass
+    h.insertItem2(message,(void *)user, roomCount); // for message and pass
     //h2[roomCount].insertItem2(user,(void *)password); // hashtable for users and pass
   } else {
         const char * msg =  "DENIED\r\n";
