@@ -52,10 +52,10 @@ bool HashTableVoid::insertItem( const char * key, void * data)
 }
 
 // Mod of the inserItem function earlier to be used in the IrcServer
-bool HashTableVoid::insertItem2( const char * key, void * data)
+bool HashTableVoid::insertItem2( const char * key, void * data, int num)
 {
   // use first bucket  
-  int h = 0;
+  int h = num;
   HashTableVoidEntry * entry = _buckets[h]; 
   while (entry!=NULL) {
    if (!strcmp(entry->_key, key)) { // Entry found

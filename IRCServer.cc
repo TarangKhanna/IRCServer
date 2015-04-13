@@ -233,7 +233,7 @@ IRCServer::processRequest( int fd )
     string s(commandLine);
 	istringstream iss(s);
 	string token;
-	string strings[100];
+	string strings[10];
 	int d = 0; // also number of arguments 
 	while(getline(iss, token, ' ')) // parsing
 	{
@@ -242,11 +242,11 @@ IRCServer::processRequest( int fd )
 	      d++;
 	}
 	
-	const char * command = strings[0].c_str();
-	const char * user = strings[1].c_str(); //strings[1]
-	const char * password = strings[2].c_str();
-	const char * args = strings[3].c_str();
-
+	const char * command;
+	const char * user;
+	const char * password; 
+	const char * args;
+    int nRead = sscanf(commandLine, "%s %s %s %s", command, user, password, args);
 	printf("command=%s\n", command);
 	printf("user=%s\n", user);
 	printf( "password=%s\n", password );
@@ -557,7 +557,7 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 		}
 		roomFile.close();
     } 
-    h[roomCount].insertItem2(args,(void *)user); // for message and pass
+    h[roomCount].insertItem2(args,(void *)user, hTableCount); // for message and pass
     //h2[roomCount].insertItem2(user,(void *)password); // hashtable for users and pass
   } else {
         const char * msg =  "DENIED\r\n";
