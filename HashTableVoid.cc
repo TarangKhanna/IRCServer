@@ -4,6 +4,11 @@
 //
 #include "HashTableVoid.h"
 #include <stdio.h>
+#include <sstream>
+#include <iostream>
+#include <fstream>
+#include <unistd.h>
+using namespace std;
 // Obtain hash of a key
 // custom with multiplier
 int HashTableVoid::hash(const char * key) 
@@ -149,7 +154,7 @@ bool HashTableVoidIterator::next(const char * & key, void * & data)
   return false;
 }
 // to iterate over merely the linked list- bucket = 0 
-void HashTableVoidIterator::next2(const char * & key, void * & data, int num)
+void HashTableVoidIterator::next2(int fd, const char * & key, void * & data, int num)
 {
   _currentEntry = _hashTable->_buckets[num];
   while(_currentEntry != NULL) { 
@@ -157,6 +162,9 @@ void HashTableVoidIterator::next2(const char * & key, void * & data, int num)
         data = _currentEntry->_data; // user
         key = _currentEntry->_key; // message 
         _currentEntry = _currentEntry->_next;
+        const char * here = "In next2\n";
+        write(fd, here, strlen(here));
+        //write(fd, *key, strlen(*key));
         printf("%s %s\n", key, (char *)data);
   }
   return;
