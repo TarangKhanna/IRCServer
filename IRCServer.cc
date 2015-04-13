@@ -328,7 +328,7 @@ bool
 IRCServer::checkPassword(int fd, const char * user, const char * password) {
 	// Here check the password--find user and see if correct password 
     for(int i = 0; i < passVec.size(); i++) {
-       if(passVec[i] == userVec[i]) {
+       if(passVec[i].compare(userVec[i])) {
          return true;
        }
     }
