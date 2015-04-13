@@ -609,11 +609,12 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
 		}
 		roomFile.close();
     } 
-    HashTableVoidIterator iterator(&h2[roomCount]); // users and pass table
+    HashTableVoidIterator iterator(&h); // users and pass table
     const char * msg;
     void * gradev;
-    iterator.next(msg, gradev);
-	write(fd, msg, strlen(msg));// print key which is user for h2
+    iterator.next2(msg, gradev, roomCount);
+    //iterator.next(msg, gradev);
+	//write(fd, msg, strlen(msg));// print key which is user for h2
   } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
