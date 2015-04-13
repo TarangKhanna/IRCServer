@@ -617,7 +617,8 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
     iterator.next2(msg, gradev, roomCount);
     //iterator.next(msg, gradev);
 	//write(fd, msg, strlen(msg));// print key which is user for h2
-   } else {
+   }
+ else {
         const char * msg =  "WHY DENY?\r\n";
 	    write(fd, msg, strlen(msg));
   } 
