@@ -593,7 +593,28 @@ void
 IRCServer::getUsersInRoom(int fd, const char * user, const char * password, const char * args)
 {
    if(checkPassword(fd, user, password)) {
-  	
+  	int roomCount = 0; // this is the number h[roomCount]
+  	// h[0] is the first room- which is also the first room in the file
+  	roomFile.open(ROOM_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
+    if (roomFile.is_open()) // check room
+     {
+        string line;
+		while (getline(roomFile, line)) // separated by \n
+		{
+            string str13(args);
+            if(line.compare(str13) == 0) { 
+               break;
+            }
+            roomCount++; 
+		}
+		roomFile.close();
+    } 
+    HashTableVoidIterator iterator(&h); // users and pass table
+    const char * msg;
+    void * gradev;
+    iterator.next2(msg, gradev, roomCount);
+    //iterator.next(msg, gradev);
+	//write(fd, msg, strlen(msg));// print key which is user for h2
    } else {
         const char * msg =  "WHY DENY?\r\n";
 	    write(fd, msg, strlen(msg));
