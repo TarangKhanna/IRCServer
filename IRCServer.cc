@@ -241,10 +241,10 @@ IRCServer::processRequest( int fd )
 	      //cout << strings[d] << endl;
 	      d++;
 	}
-    char * command1;
-	char * user2;
-    char * password3; 
-    char * args4;
+    char command1[1025];
+	char user2[1025];
+    char password3[1025]; 
+    char args4[1025];
 	int nRead = sscanf(commandLine, "%s %s %s %s", command1, user2, password3, args4);
 	const char * command = command1;
 	const char * user = user2;
