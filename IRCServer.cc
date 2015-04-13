@@ -329,7 +329,7 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 	// Here check the password--find user and see if correct password 
     for(int i = 0; i < passVec.size(); i++) {
        cout << "pass - " << passVec[i] << "user - " << userVec[i];
-       if(passVec[i].compare(password) && userVec[i].compare(user)) {
+       if((passVec[i].compare(password) == 0) && (userVec[i].compare(user) == 0)) {
          return true;
        }
     }
