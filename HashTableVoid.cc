@@ -166,10 +166,6 @@ void HashTableVoidIterator::next2(int fd, const char * & key, void * & data, int
         key = _currentEntry->_key; // user 
         _currentEntry = _currentEntry->_next;
         sortVec.push_back(key);
-        //const char * msg = (const char *)key;
-        //write(fd, msg, strlen(msg));
-        //const char * msg2 = "\r\n";
-        //write(fd, msg2, strlen(msg2));
    }
    sort(sortVec.begin(), sortVec.end());
    for(int i = 0; i < sortVec.size(); i++) {
