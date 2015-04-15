@@ -169,7 +169,7 @@ void HashTableVoidIterator::next2(int fd, const char * & key, void * & data, int
    }
    sort(sortVec.begin(), sortVec.end());
    for(int i = 0; i < sortVec.size(); i++) {
-  	   const char * msg = sortVec[i].c_str();
+       const char * msg = sortVec[i].c_str();
        write(fd, msg, strlen(msg));
        const char * msg3 = "\r\n";
        write(fd, msg3, strlen(msg3));
@@ -177,5 +177,28 @@ void HashTableVoidIterator::next2(int fd, const char * & key, void * & data, int
     const char * msg4 = "\r\n";
     write(fd, msg4, strlen(msg4));
     return;
+}
+
+bool HashTableVoid::removeElement2(const char * key, int roomCount)
+{
+   // Get hash bucket 
+   int h = roomCount;
+   HashTableVoidEntry * e = _buckets[h]; 
+   HashTableVoidEntry * prev = NULL; 
+   while (e!=NULL) {
+   if (!strcmp(e->_key, key)) { // found
+    if (prev != NULL) {
+     prev->_next = e->_next; }
+    else {
+     _buckets[h] = e->_next;
+    }
+    //free(e->_key); // does not seem to work
+    delete e;
+    return true;
+   }
+   prev = e;
+   e = e->_next;
+   }
+  return false;
 }
 

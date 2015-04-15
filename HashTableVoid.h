@@ -42,6 +42,9 @@ class HashTableVoid {
 
   // Removes an element in the hash table. Return false if key does not exist.
   bool removeElement(const char * key);
+  
+  // mod to remove users from a room(bucket)
+  bool removeElement2(const char * key, int roomCount); 
 };
 
 class HashTableVoidIterator {

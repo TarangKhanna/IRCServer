@@ -44,7 +44,7 @@ int QueueLength = 5;
 fstream passFile;
 fstream userFile;
 fstream roomFile;
-HashTableVoid h;
+HashTableVoid h; // USER and PASS in room - bucket 0 is room 0
 HashTableVoid *h2 = (HashTableVoid*) malloc(sizeof(HashTableVoid)*10); 
 vector<string> userVec;
 vector<string> passVec;
@@ -386,7 +386,14 @@ void
 IRCServer::leaveRoom(int fd, const char * user, const char * password, const char * args)
 { 
   if(checkPassword(fd, user, password)) {
-      // h.remove2  
+  	int roomCount = 0; 
+  	for(int i = 0; i < roomVec.size(); i++) {
+       if((roomVec[i].compare(args) == 0)) {
+          break;
+       }
+       roomCount++;
+    }
+    h.removeElement2(user, roomCount);
   } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
