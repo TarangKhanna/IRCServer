@@ -45,7 +45,7 @@ fstream passFile;
 fstream userFile;
 fstream roomFile;
 HashTableVoid h; // USER and PASS in room - bucket 0 is room 0
-HashTableVoid *h2 = (HashTableVoid*) malloc(sizeof(HashTableVoid)*10); 
+HashTableVoid h2; // MESSAGE and USER in room - bucket 0 is room 0
 vector<string> userVec;
 vector<string> passVec;
 vector<string> roomVec;
@@ -396,7 +396,6 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
     HashTableVoidIterator iterator(&h);
     const char * key5;
     void * gradev;
-    //iterator.next(key, gradev);
   	if(!iterator.userInRoomExists(fd,key5, gradev, user,roomCount)) {
         const char * msg3 =  "ERROR (No user in room)\r\n";
     	write(fd, msg3, strlen(msg3));
@@ -414,29 +413,22 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
 void
 IRCServer::sendMessage(int fd, const char * user, const char * password, const char * args)
 {
-   char pRoom[10];
+
+   char pRoom[100];
    char message[1025];
    int nRead = sscanf(args,"%s %s", pRoom, message);
-   cout << "HERE BRUH "<< message << "THEN " <<  pRoom ;
    if(checkPassword(fd, user, password)) {
-  	int roomCount = 0; // this is the number h[roomCount]
-  	// h[0] is the first room- which is also the first room in the file
-  	roomFile.open(ROOM_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
-    if (roomFile.is_open()) // check room
-     {
-        string line;
-		while (getline(roomFile, line)) // separated by \n
-		{
-            string str13(args);
-            if(line.compare(str13) == 0) { 
-               break;
-            }
-            roomCount++; 
-		}
-		roomFile.close();
-    } 
-    h.insertItem2(message,(void *)user, roomCount); // for message and pass
-    //h2[roomCount].insertItem2(user,(void *)password); // hashtable for users and pass
+    const char * msg2 =  "OK\r\n";
+    write(fd, msg2, strlen(msg2));
+  	int roomCount = 0; 
+  	for(int i = 0; i < roomVec.size(); i++) {
+       if((roomVec[i].compare(args) == 0)) {
+          break;
+       }
+       roomCount++;
+    }
+    h2.insertItem2(message,(void *)user, roomCount); // for message and pass
+    
   } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
