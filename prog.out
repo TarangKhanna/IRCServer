@@ -1,0 +1,97 @@
+Start Test 10
+Add Users
+ADD-USER superman clarkkent
+response:
+OK
+
+ADD-USER spiderman peterpark
+response:
+OK
+
+ADD-USER mary poppins
+response:
+OK
+
+Create Room
+CREATE-ROOM superman clarkkent java-programming
+response:
+OK
+
+Create Room
+CREATE-ROOM spiderman peterpark c-programming
+response:
+OK
+
+Enter room
+ENTER-ROOM superman clarkkent python-programming
+response:
+
+ENTER-ROOM aquaman xyz python-programming
+response:
+DENIED
+
+ENTER-ROOM spiderman peterpark c-programming
+response:
+
+ENTER-ROOM aquaman xyz c-programming
+response:
+DENIED
+
+ENTER-ROOM mary poppins c-programming
+response:
+
+Print users in room
+GET-USERS-IN-ROOM unknown clarkkent java-programming
+response:
+ERROR (Wrong password)
+
+GET-USERS-IN-ROOM mary poppins java-programming
+response:
+ALLOW
+In next2
+
+Enter another user
+ENTER-ROOM spiderman peterpark c-programming
+response:
+
+Print users in room
+GET-USERS-IN-ROOM unknown peterpark c-programming
+response:
+ERROR (Wrong password)
+
+Send message
+SEND-MESSAGE superman clarkkent c-programming Hi everybody!
+response:
+
+SEND-MESSAGE unknown poppins c-programming Welcome to the talk program!
+response:
+DENIED
+
+Send message
+SEND-MESSAGE superman clarkkent java-programming Welcome to java-programming!
+response:
+
+SEND-MESSAGE aquaman xyz java-programming Java is based on C++!
+response:
+DENIED
+
+Get messages
+GET-MESSAGES mary poppins 0 java-programming
+response:
+
+Get messages
+GET-MESSAGES superman clarkkent 0 c-programming
+response:
+
+Get messages from 0
+GET-MESSAGES mary poppins 10000 c-programming
+response:
+
+LEAVE-ROOM mary poppins c-programming
+response:
+
+Get messages from 2
+GET-MESSAGES superman clarkkent 4 java-programming
+response:
+
+Killing Server
