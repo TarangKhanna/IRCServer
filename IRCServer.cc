@@ -393,10 +393,21 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
        }
        roomCount++;
     }
-    h.removeElement2(user, roomCount);
+    HashTableVoidIterator iterator(&h);
+    const char * key5;
+    void * gradev;
+    //iterator.next(key, gradev);
+  	if(!iterator.userInRoomExists(fd,key5, gradev, user,roomCount)) {
+        const char * msg3 =  "ERROR (No user in room)\r\n";
+    	write(fd, msg3, strlen(msg3));
+  	} else {
+        h.removeElement2(user, roomCount);
+        const char * msg2 =  "OK\r\n";
+    	write(fd, msg2, strlen(msg2));
+    }
   } else {
-        const char * msg =  "DENIED\r\n";
-	    write(fd, msg, strlen(msg));
+    const char * msg =  "DENIED\r\n";
+	write(fd, msg, strlen(msg));
   }
 }
 

@@ -202,3 +202,16 @@ bool HashTableVoid::removeElement2(const char * key, int roomCount)
   return false;
 }
 
+bool HashTableVoidIterator::userInRoomExists(int fd, const char * & key, void * & data, const char * user,int num) // sort this
+{
+   _currentEntry = _hashTable->_buckets[num];
+   while(_currentEntry != NULL) { 
+        data = _currentEntry->_data; // pass
+        key = _currentEntry->_key; // user 
+        if(strcmp(user, key) == 0) {
+           return true;
+        }
+        _currentEntry = _currentEntry->_next; 
+   }
+   return false;
+}
