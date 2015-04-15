@@ -529,10 +529,10 @@ IRCServer::getAllUsers(int fd, const char * user, const char * password,const  c
   	for(int i = 0; i < userVec.size(); i++) {
   	   const char * msg = userVec[i].c_str();
        write(fd, msg, strlen(msg));
-       const char * msg3 = "\n";
+       const char * msg3 = "\r\n";
        write(fd, msg3, strlen(msg3));
     }
-    const char * msg4 = "\n";
+    const char * msg4 = "\r\n";
     write(fd, msg4, strlen(msg4));
   } else {
         const char * msg =  "DENIED\r\n";
