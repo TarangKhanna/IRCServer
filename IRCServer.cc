@@ -490,10 +490,7 @@ void
 IRCServer::getUsersInRoom(int fd, const char * user, const char * password, const char * args)
 {
    if(checkPassword(fd, user, password)) {
-    const char * msg2 =  "ALLOW\r\n";
-    write(fd, msg2, strlen(msg2));
   	int roomCount = 0; // this is the number h[roomCount]
-  	// h[0] is the first room- which is also the first room in the file
   	roomFile.open(ROOM_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
     if (roomFile.is_open()) // check room
      {
