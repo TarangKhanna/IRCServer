@@ -406,6 +406,8 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
     //h[roomCount].insertItem2(message,(void *)user); // for message and pass
     h.insertItem2(user,(void *)password, roomCount); // hashtable for users and pass
     bucketCount++;
+    const char * msg =  "OK\r\n";
+	write(fd, msg, strlen(msg));
   } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
