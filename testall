@@ -1,5 +1,14 @@
 #!/bin/bash
 
+if [ $# -ne 1 ]
+then
+  echo "Usage: `basename $0` port"
+  exit 1
+fi
+
+
+PORT=$1
+
 export LAB=lab6
 
 (make clean; make) || exit 1
@@ -33,26 +42,33 @@ function runtest {
 
   #Run tested program
   rm -f prog.out prog.org.out
-  echo "./$prog $args < $testinput > prog.out"
-  echo "./$progorg $args < $testinput > prog.org.out"
-  ./$prog $args < $testinput > prog.out
-  ./$progorg $args < $testinput > prog.org.out
-  diff prog.out prog.org.out > diff.out
+  echo "$prog $args < $testinput > prog.out"
+  echo "$progorg $args < $testinput > prog.org.out"
+  $prog $args < $testinput > prog.out
+  $progorg $args < $testinput > prog.org.out
   if [ $? -eq 0 ]; then
-      cat prog.out
-      echo Test passed...;
-      printf "%-36s: %-3d of %-3d\n" "$descr " $grade $grade >> total.txt
-      total=`expr $total + $grade`;
+  	diff prog.out prog.org.out > diff.out
+  	if [ $? -eq 0 ]; then
+      		cat prog.out
+      		echo Test passed...;
+      		printf "%-36s: %-3d of %-3d\n" "$descr " $grade $grade >> total.txt
+      		total=`expr $total + $grade`;
+  	else
+      		echo "*****Test Failed*****";
+      		echo ------ Your Output ----------
+      		cat prog.out
+      		echo ------ Expected Output ------
+      		cat prog.org.out
+      		echo ------ Difference -----------
+      		cat diff.out
+      		echo -----------------------------
+      		printf "%-36s: %-3d of %-3d\n" "$descr " 0 $grade >> total.txt
+  	fi
   else
-      echo "*****Test Failed*****";
-      echo ------ Your Output ----------
-      cat prog.out
-      echo ------ Expected Output ------
-      cat prog.org.out
-      echo ------ Difference -----------
-      cat diff.out
-      echo -----------------------------
-      printf "%-36s: %-3d of %-3d\n" "$descr " 0 $grade >> total.txt
+	echo "*****Test Failed*****";
+	echo $progorg failed
+	printf "%-36s: %-3d of %-3d\n" "$descr " 0 $grade >> total.txt
+
   fi
   echo
 }
@@ -64,6 +80,17 @@ runtest ./HashTableVoidTest ./HashTableVoidTest.org "test3" none 2
 runtest ./HashTableVoidTest ./HashTableVoidTest.org "test4" none 2
 runtest ./HashTableVoidTest ./HashTableVoidTest.org "test5" none 2
 runtest ./HashTableVoidTest ./HashTableVoidTest.org "test6" none 2
+
+runtest "./test-server1.sh ./IRCServer $PORT" "./test-server1.sh ./IRCServer.org $PORT" "" none 5
+runtest "./test-server2.sh ./IRCServer $PORT" "./test-server2.sh ./IRCServer.org $PORT" "" none 5
+runtest "./test-server3.sh ./IRCServer $PORT" "./test-server3.sh ./IRCServer.org $PORT" "" none 5
+runtest "./test-server4.sh ./IRCServer $PORT" "./test-server4.sh ./IRCServer.org $PORT" "" none 5
+runtest "./test-server5.sh ./IRCServer $PORT" "./test-server5.sh ./IRCServer.org $PORT" "" none 5
+runtest "./test-server6.sh ./IRCServer $PORT" "./test-server6.sh ./IRCServer.org $PORT" "" none 5
+runtest "./test-server7.sh ./IRCServer $PORT" "./test-server7.sh ./IRCServer.org $PORT" "" none 5
+runtest "./test-server8.sh ./IRCServer $PORT" "./test-server8.sh ./IRCServer.org $PORT" "" none 5
+runtest "./test-server9.sh ./IRCServer $PORT" "./test-server9.sh ./IRCServer.org $PORT" "" none 5
+runtest "./test-server10.sh ./IRCServer $PORT" "./test-server10.sh ./IRCServer.org $PORT" "" none 5
 
 echo
 echo
