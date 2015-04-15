@@ -166,6 +166,8 @@ void HashTableVoidIterator::next2(int fd, const char * & key, void * & data, int
         const char * msg2 = "\n";
         write(fd, msg2, strlen(msg2));
    }
+   const char * msg2 = "\n";
+   write(fd, msg2, strlen(msg2));
    return;
 }
 
