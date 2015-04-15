@@ -163,10 +163,10 @@ void HashTableVoidIterator::next2(int fd, const char * & key, void * & data, int
         _currentEntry = _currentEntry->_next;
         const char * msg = (const char *)key;
         write(fd, msg, strlen(msg));
-        const char * msg2 = "\n";
+        const char * msg2 = "\r\n";
         write(fd, msg2, strlen(msg2));
    }
-   const char * msg2 = "\n";
+   const char * msg2 = "\r\n";
    write(fd, msg2, strlen(msg2));
    return;
 }
