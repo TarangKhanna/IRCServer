@@ -532,7 +532,8 @@ IRCServer::getAllUsers(int fd, const char * user, const char * password,const  c
        const char * msg3 = "\n";
        write(fd, msg3, strlen(msg3));
     }
-
+    const char * msg4 = "\n";
+    write(fd, msg4, strlen(msg4));
   } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
