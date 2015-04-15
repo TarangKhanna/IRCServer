@@ -251,6 +251,7 @@ IRCServer::initialize()
     	while(getline (passFile,line)) {
     	  if(n % 2 == 1) {
             userVec.push_back(line); // user\npassword\n\nuser(2)
+            cout << line << '\n';
             getline (passFile,line);
             passVec.push_back(line);
             cout << line << '\n';
