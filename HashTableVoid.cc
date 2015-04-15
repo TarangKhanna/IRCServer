@@ -154,7 +154,7 @@ bool HashTableVoidIterator::next(const char * & key, void * & data)
   return false;
 }
 // to iterate over merely the linked list- bucket = 0 gets users in room
-void HashTableVoidIterator::next2(int fd, const char * & key, void * & data, int num)
+void HashTableVoidIterator::next2(int fd, const char * & key, void * & data, int num) // sort this
 {
    _currentEntry = _hashTable->_buckets[num];
    while(_currentEntry != NULL) { 
