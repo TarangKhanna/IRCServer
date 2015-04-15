@@ -418,8 +418,6 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
    char message[1025];
    int nRead = sscanf(args,"%s %s", pRoom, message);
    if(checkPassword(fd, user, password)) {
-    const char * msg2 =  "OK\r\n";
-    write(fd, msg2, strlen(msg2));
   	int roomCount = 0; 
   	for(int i = 0; i < roomVec.size(); i++) {
        if((roomVec[i].compare(args) == 0)) {
@@ -428,7 +426,8 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
        roomCount++;
     }
     h2.insertItem2(message,(void *)user, roomCount); // for message and pass
-    
+    const char * msg2 =  "OK\r\n";
+    write(fd, msg2, strlen(msg2));
   } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
