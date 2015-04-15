@@ -481,7 +481,6 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
     const char * key;
     void * gradev;
     iterator.next(key, gradev);
-    // print key which is message
   } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));

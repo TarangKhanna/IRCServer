@@ -171,9 +171,11 @@ void HashTableVoidIterator::next2(int fd, const char * & key, void * & data, int
         //write(fd, msg2, strlen(msg2));
    }
    sort(sortVec.begin(), sortVec.end());
-  	for(int i = 0; i < sortVec.size(); i++) {
+  for(int i = 0; i < sortVec.size(); i++) {
   	   const char * msg = sortVec[i].c_str();
        write(fd, msg, strlen(msg));
+       const char * msg2 = "THIS21\n";
+       write(fd, msg2, strlen(msg2));
        const char * msg3 = "\r\n";
        write(fd, msg3, strlen(msg3));
     }
