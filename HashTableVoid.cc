@@ -164,6 +164,8 @@ void HashTableVoidIterator::next2(int fd, const char * & key, void * & data, int
    while(_currentEntry != NULL) { 
         data = _currentEntry->_data; // pass
         key = _currentEntry->_key; // user 
+        const char * msg10 = (const char *)key;
+        write(fd, msg10, strlen(msg10));
         _currentEntry = _currentEntry->_next;
         sortVec.push_back(key);
    }
@@ -188,13 +190,14 @@ bool HashTableVoid::removeElement2(const char * key, int roomCount)
    while (e!=NULL) {
    if (!strcmp(e->_key, key)) { // found
     if (prev != NULL) {
-     prev->_next = e->_next; }
+     prev->_next = e->_next; 
+    }
     else {
      _buckets[h] = e->_next;
     }
     //free(e->_key); // does not seem to work
     delete e;
-    return true;
+    return true; 
    }
    prev = e;
    e = e->_next;
