@@ -439,24 +439,16 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
 {
    if(checkPassword(fd, user, password)) {
   	int roomCount = 0; 
-  	roomFile.open(ROOM_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
-    if (roomFile.is_open()) // check room
-     {
-        string line;
-		while (getline(roomFile, line)) // separated by \n
-		{
-            string str13(args);
-            if(line.compare(str13) == 0) { 
-               break;
-            }
-            roomCount++; 
-		}
-		roomFile.close();
-    } 
-    HashTableVoidIterator iterator(&h);
-    const char * key;
+  	for(int i = 0; i < roomVec.size(); i++) {
+       if((roomVec[i].compare(args) == 0)) {
+          break;
+       }
+       roomCount++;
+    }
+    HashTableVoidIterator iterator(&h2); // messages and user table
+    const char * msg;
     void * gradev;
-    iterator.next(key, gradev);
+    iterator.next2(fd,msg, gradev, roomCount);
   } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
@@ -483,7 +475,6 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
 		}
 		roomFile.close();
     } 
-
     HashTableVoidIterator iterator(&h); // users and pass table
     const char * msg;
     void * gradev;
