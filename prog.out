@@ -1,0 +1,53 @@
+Start Test 3
+Add Users
+ADD-USER superman clarkkent
+response:
+OK
+
+ADD-USER spiderman peterpark
+response:
+OK
+
+ADD-USER aquaman xyz
+response:
+OK
+
+ADD-USER mary poppins
+response:
+OK
+
+Create Room
+CREATE-ROOM superman clarkkent java-programming
+response:
+OK
+
+Enter room
+ENTER-ROOM superman clarkkent java-programming
+response:
+OK
+
+ENTER-ROOM aquaman xyz java-programming
+response:
+OK
+
+Print users in room
+GET-USERS-IN-ROOM superman clarkkent java-programming
+response:
+aquaman
+superman
+
+
+Enter another user
+ENTER-ROOM mary poppins java-programming
+response:
+OK
+
+Print users in room
+GET-USERS-IN-ROOM mary poppins java-programming
+response:
+aquaman
+mary
+superman
+
+
+Killing Server
