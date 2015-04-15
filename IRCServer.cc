@@ -34,6 +34,7 @@ const char * usage =
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <algorithm> 
 #include "IRCServer.h"
 #include "HashTableVoid.h"
 using namespace std;
@@ -251,10 +252,9 @@ IRCServer::initialize()
     	while(getline (passFile,line)) {
     	  if(n % 2 == 1) {
             userVec.push_back(line); // user\npassword\n\nuser(2)
-            cout << line << '\n';
             getline (passFile,line);
             passVec.push_back(line);
-            cout << line << '\n';
+            //cout << line << '\n';
             n++;
          } else {
             getline (passFile,line); // space
@@ -516,7 +516,7 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
 	//write(fd, msg, strlen(msg));// print key which is user for h2
    }
  else {
-        const char * msg =  "WHY DENY?\r\n";
+        const char * msg =  "ERROR (Wrong password)\r\n";
 	    write(fd, msg, strlen(msg));
   } 
 }
@@ -525,25 +525,12 @@ void
 IRCServer::getAllUsers(int fd, const char * user, const char * password,const  char * args)
 {
   if(checkPassword(fd, user, password)) {
-	userFile.open(USER_FILE);
-	string line;
-	string pass[1000];
-    int n;
-	if (userFile.is_open())
-     {
-		while (getline(userFile, line)) // separated by \n
-		{
-            stringstream ss;
-            ss << line << "\r\n";
-            string s = ss.str();
-			const char * msg = s.c_str();
-			write(fd, msg, strlen(msg));
-		}
-		userFile.close();
+  	sort(userVec.begin(), userVec.end());
+  	for(int i = 0; i < userVec.size(); i++) {
+  	   const char * msg = userVec[i].c_str();
+       write(fd, msg, strlen(msg));
     }
-	else {
-	 	cout << "Can't read file\n";
-	} 
+
   } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
