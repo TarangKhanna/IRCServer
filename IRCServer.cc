@@ -3,7 +3,7 @@ const char * usage =
 "                                                               \n"
 "IRCServer:                                                   \n"
 "                                                               \n"
-"Simple server program used to communicate multiple users       \n"
+"Simple server parogram used to communicate multiple users       \n"
 "                                                               \n"
 "To use it in one window type:                                  \n"
 "                                                               \n"
@@ -140,51 +140,6 @@ main( int argc, char ** argv )
 	
 }
 
-//
-// Commands:
-//   Commands are started y the client.
-//
-//   Request: ADD-USER <USER> <PASSWD>\r\n
-//   Answer: OK\r\n or DENIED\r\n
-//
-//   REQUEST: GET-ALL-USERS <USER> <PASSWD>\r\n
-//   Answer: USER1\r\n
-//            USER2\r\n
-//            ...
-//            \r\n
-//
-//   REQUEST: CREATE-ROOM <USER> <PASSWD> <ROOM>\r\n
-//   Answer: OK\n or DENIED\r\n
-//
-//   Request: LIST-ROOMS <USER> <PASSWD>\r\n
-//   Answer: room1\r\n
-//           room2\r\n
-//           ...
-//           \r\n
-//
-//   Request: ENTER-ROOM <USER> <PASSWD> <ROOM>\r\n
-//   Answer: OK\n or DENIED\r\n
-//
-//   Request: LEAVE-ROOM <USER> <PASSWD>\r\n
-//   Answer: OK\n or DENIED\r\n
-//
-//   Request: SEND-MESSAGE <USER> <PASSWD> <MESSAGE> <ROOM>\n
-//   Answer: OK\n or DENIED\n
-//
-//   Request: GET-MESSAGES <USER> <PASSWD> <LAST-MESSAGE-NUM> <ROOM>\r\n
-//   Answer: MSGNUM1 USER1 MESSAGE1\r\n
-//           MSGNUM2 USER2 MESSAGE2\r\n
-//           MSGNUM3 USER2 MESSAGE2\r\n
-//           ...\r\n
-//           \r\n
-//
-//    REQUEST: GET-USERS-IN-ROOM <USER> <PASSWD> <ROOM>\r\n
-//    Answer: USER1\r\n
-//            USER2\r\n
-//            ...
-//            \r\n
-//
-
 void
 IRCServer::processRequest( int fd )
 {
@@ -290,31 +245,22 @@ IRCServer::initialize()
     printf("Initialize\n");
     passFile.open(PASSWORD_FILE);
     string line;
+    int n = 1;
     if (passFile.is_open())
     {
-      while ( getline (passFile,line) ) // separated by \n
-        {
-           passVec.push_back(line);
-           cout << line << '\n';
-        }
+    	while(getline (passFile,line)) {
+    	  if(n % 2 == 1) {
+            userVec.push_back(line); // user\npassword\n\nuser(2)
+            getline (passFile,line);
+            passVec.push_back(line);
+            cout << line << '\n';
+            n++;
+         } else {
+            getline (passFile,line); // space
+            n++;
+         }
+      }
       passFile.close();
-    } else {
-      cout << "Can't read file\n";
-    }
-    for(int i = 0; i < passVec.size(); i++) {
-      //cout << passVec[i] << "Passworddd" << endl;
-    }
-    userFile.open(USER_FILE);
-    if (userFile.is_open())
-    {
-      while ( getline (userFile,line) ) // separated by \n
-        {
-           userVec.push_back(line);
-           cout << line << '\n';
-        }
-      userFile.close();
-    } else {
-      cout << "Can't read file\n";
     }
 	// Initialize users in room
     ofstream resetRoom; // reset room file
@@ -334,48 +280,30 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 	return false;
 }
 
+bool
+IRCServer::userExists(const char * user) {
+    for(int i = 0; i < userVec.size(); i++) {
+       if((userVec[i].compare(user) == 0)) {
+          return true;
+       }
+    }
+    return false;
+} 
+
 void
 IRCServer::addUser(int fd, const char * user, const char * password, const char * args)
 {
-    userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
-    if (userFile.is_open()) // check users
-     {
-        string line;
-        int count = 0;
-		while (getline(userFile, line)) // separated by \n
-		{
-            string str13(user);
-            if(line.compare(str13) == 0) { 
-               count++;
-            }
-		}
-        if(count > 0) {
-               const char * msg =  "DENIED\r\n";
-	           write(fd, msg, strlen(msg));
-               userFile.close();  
-        } else {
-			   userFile.close();
-	     	   const char * msg = "OK\r\n";
-			   write(fd, msg, strlen(msg));
-			   passFile.open(PASSWORD_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
-               if (passFile.is_open())
-               {
-			      passFile << password << '\n';
-                  passVec.push_back(password);
-			      passFile.close();
-			    } else {
-			      cout << "Can't read file\n";
-			    } // adding pass to file
-			    userFile.open(USER_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
-			    if (userFile.is_open())
-			    {
-			      userFile<< user << '\n'; 
-                  userVec.push_back(user);
-			      userFile.close();
-			    } else {
-			      cout << "Can't read file\n";
-			    }
-		       }
+    if(userExists(user)) {
+       const char * msg =  "DENIED\r\n";
+	   write(fd, msg, strlen(msg));
+    } else {
+       passFile.open(PASSWORD_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
+       passFile << user << '\n' << password << '\n\n';
+       userFile.close();
+       passVec.push_back(password);
+       userVec.push_back(user);
+       const char * msg =  "OK\r\n";
+	   write(fd, msg, strlen(msg));
     }
 	return;		
 }

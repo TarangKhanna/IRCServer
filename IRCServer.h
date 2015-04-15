@@ -29,6 +29,7 @@ public:
     void createRoom(int fd, const char * user, const char * password, const char * args);
     void listRoom(int fd, const char * user, const char * password, const char * args);
 	void runServer(int port);
+    bool userExists(const char * user);
 };
 
 #endif
