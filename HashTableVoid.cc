@@ -8,9 +8,12 @@
 #include <iostream>
 #include <fstream>
 #include <unistd.h>
+#include <vector>
+#include <algorithm> 
 using namespace std;
 // Obtain hash of a key
 // custom with multiplier
+vector<string> sortVec;
 int HashTableVoid::hash(const char * key) 
 {
   int i = 0;
@@ -161,13 +164,21 @@ void HashTableVoidIterator::next2(int fd, const char * & key, void * & data, int
         data = _currentEntry->_data; // pass
         key = _currentEntry->_key; // user 
         _currentEntry = _currentEntry->_next;
-        const char * msg = (const char *)key;
-        write(fd, msg, strlen(msg));
-        const char * msg2 = "\r\n";
-        write(fd, msg2, strlen(msg2));
+        sortVec.push_back(key);
+        //const char * msg = (const char *)key;
+        //write(fd, msg, strlen(msg));
+        //const char * msg2 = "\r\n";
+        //write(fd, msg2, strlen(msg2));
    }
-   const char * msg2 = "\r\n";
-   write(fd, msg2, strlen(msg2));
+   sort(sortVec.begin(), sortVec.end());
+  	for(int i = 0; i < sortVec.size(); i++) {
+  	   const char * msg = sortVec[i].c_str();
+       write(fd, msg, strlen(msg));
+       const char * msg3 = "\r\n";
+       write(fd, msg3, strlen(msg3));
+    }
+    const char * msg4 = "\r\n";
+    write(fd, msg4, strlen(msg4));
    return;
 }
 
