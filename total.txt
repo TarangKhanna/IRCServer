@@ -1,1 +1,2 @@
-./test-server4.sh ./IRCServer 8013   : 0   of 5  
+./test-server2.sh ./IRCServer 8013   : 5   of 5  
+./test-server3.sh ./IRCServer 8013   : 5   of 5  
