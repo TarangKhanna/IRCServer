@@ -30,6 +30,7 @@ public:
     void listRoom(int fd, const char * user, const char * password, const char * args);
 	void runServer(int port);
     bool userExists(const char * user);
+    bool roomExists(const char * args);
 };
 
 #endif
