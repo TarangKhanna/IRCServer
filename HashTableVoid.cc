@@ -153,7 +153,7 @@ bool HashTableVoidIterator::next(const char * & key, void * & data)
   }
   return false;
 }
-// to iterate over merely the linked list- bucket = 0 
+// to iterate over merely the linked list- bucket = 0 gets users in room
 void HashTableVoidIterator::next2(int fd, const char * & key, void * & data, int num)
 {
    const char * here = "In next2\n";
@@ -162,12 +162,11 @@ void HashTableVoidIterator::next2(int fd, const char * & key, void * & data, int
    _currentEntry = _hashTable->_buckets[num];
    while(_currentEntry != NULL) { 
         //printf("_currentBucket: %d at %s HERE\n",(int*)_currentEntry->_data,_currentEntry->_key);
-        data = _currentEntry->_data; // user
-        key = _currentEntry->_key; // message 
+        data = _currentEntry->_data; // pass
+        key = _currentEntry->_key; // user 
         _currentEntry = _currentEntry->_next;
-        const char * msg = (const char *) data;
+        const char * msg = key;
         write(fd, msg, strlen(msg));
-        printf("%s HERE %s\n", key, (char *)data);
    }
    return;
 }
