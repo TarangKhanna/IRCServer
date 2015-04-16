@@ -428,10 +428,6 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
        }
        roomCount++;
     }
-    const char * msg20 = args;
-    write(fd, msg20, strlen(msg20));
-    const char * msg21 = "THAT^\n";
-    write(fd, msg21, strlen(msg21));
     h2.insertItem2(message,(void *)user, roomCount); // for message and pass
     const char * msg2 =  "OK\r\n";
     write(fd, msg2, strlen(msg2));
