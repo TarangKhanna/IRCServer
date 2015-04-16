@@ -162,14 +162,38 @@ void HashTableVoidIterator::next2(int fd, const char * & key, void * & data, int
    sortVec.clear();
    _currentEntry = _hashTable->_buckets[num];
    while(_currentEntry != NULL) { 
-        data = _currentEntry->_data; // pass
-        key = _currentEntry->_key; // user 
+        data = _currentEntry->_data; // pass or user
+        key = _currentEntry->_key; // user or msg
         _currentEntry = _currentEntry->_next;
         sortVec.push_back(key);
    }
    sort(sortVec.begin(), sortVec.end());
    for(int i = 0; i < sortVec.size(); i++) {
        const char * msg = sortVec[i].c_str();
+       write(fd, msg, strlen(msg));
+       const char * msg3 = "\r\n";
+       write(fd, msg3, strlen(msg3));
+    }
+    const char * msg4 = "\r\n";
+    write(fd, msg4, strlen(msg4));
+    return;
+}
+
+void HashTableVoidIterator::next3(int fd, const char * & key, void * & data, int num) // sort this
+{
+   sortVec.clear();
+   vector<string> msgUserVec;
+   _currentEntry = _hashTable->_buckets[num];
+   while(_currentEntry != NULL) { 
+        data = _currentEntry->_data; // pass or user
+        key = _currentEntry->_key; // user or msg
+        _currentEntry = _currentEntry->_next;
+        sortVec.push_back(key);
+   }
+   sort(sortVec.begin(), sortVec.end());
+   // now use find on this key and find user 
+   for(int i = 0; i < sortVec.size(); i++) {
+       const char * msg = sortVec[i].c_str(); 
        write(fd, msg, strlen(msg));
        const char * msg3 = "\r\n";
        write(fd, msg3, strlen(msg3));
