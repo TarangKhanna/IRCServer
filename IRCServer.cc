@@ -195,7 +195,7 @@ IRCServer::processRequest( int fd )
     memset(user2, 0, 1025);
     memset(password3, 0, 1025);
     memset(args4, 0, 1025);
-	int nRead = sscanf(commandLine, "%s %s %s %s", command1, user2, password3, args4);
+	int nRead = sscanf(commandLine, "%s %s %s %[^\n]", command1, user2, password3, args4);
 	const char * command = command1;
 	const char * user = user2;
 	const char * password = password3;
