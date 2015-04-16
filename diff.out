@@ -1,0 +1,44 @@
+65,66c65,66
+< Hi
+< Welcome
+---
+> 0 mary Hi everybody!
+> 1 mary Welcome to the talk program!
+117,121c117,129
+< Here
+< Hi
+< I
+< Welcome
+< message
+---
+> 0 mary Hi everybody!
+> 1 mary Welcome to the talk program!
+> 2 superman Hi Mary!
+> 3 superman Here I am working on cs240
+> 4 superman I am testing the project
+> 5 superman message 1
+> 6 superman message 2
+> 7 superman message 3
+> 8 superman message 4
+> 9 superman message 5
+> 10 superman message 6
+> 11 superman message 7
+> 12 superman message 8
+132,136c140,150
+< Here
+< Hi
+< I
+< Welcome
+< message
+---
+> 2 superman Hi Mary!
+> 3 superman Here I am working on cs240
+> 4 superman I am testing the project
+> 5 superman message 1
+> 6 superman message 2
+> 7 superman message 3
+> 8 superman message 4
+> 9 superman message 5
+> 10 superman message 6
+> 11 superman message 7
+> 12 superman message 8
