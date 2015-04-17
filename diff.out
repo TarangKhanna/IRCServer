@@ -1,0 +1,20 @@
+36,37c36,37
+< 0 clarkkent aquaman
+< 1 clarkkent superman
+---
+> aquaman
+> superman
+48,50c48,50
+< 0 poppins mary
+< 1 poppins aquaman
+< 2 poppins superman
+---
+> aquaman
+> mary
+> superman
+65,66c65,66
+< 0 superman Welcome
+< 1 superman Hi
+---
+> 0 mary Hi everybody!
+> 1 mary Welcome to the talk program!
