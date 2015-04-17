@@ -452,6 +452,7 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
     void * gradev;
     iterator2.next3(fd,msg, gradev, roomCount);
     write(fd, msg, strlen((const char *)gradev));
+    write(fd, msg, strlen((const char *)msg));
   } else {
       const char * msg =  "DENIED\r\n";
       write(fd, msg, strlen(msg));
