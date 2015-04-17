@@ -264,7 +264,7 @@ IRCServer::initialize()
          } else {
             getline (passFile,line); // space
             n++;
-         }
+          }
       }
       passFile.close();
     }
