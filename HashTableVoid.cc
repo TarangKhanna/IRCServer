@@ -193,14 +193,7 @@ void HashTableVoidIterator::next3(int fd, const char * & key, void * & data, int
         int a; 
         char buffer[1000];
         const char * value;
-        HashTableVoidEntry * e = _hashTable->_buckets[num]; 
-        while (e!=NULL) {
-          if (!strcmp(e->_key, key)) { // Entry found
-            value = (const char *) e->_data;
-           }
-         e = e->_next;
-         }
-        a=sprintf (buffer, "%d %s %s", count, data, key);
+        a=sprintf (buffer, "%d %s %s", count, (char *)data, key);
         const char * msg = (const char *) buffer; 
         write(fd, msg, strlen(msg));
         const char * msg3 = "\r\n";
