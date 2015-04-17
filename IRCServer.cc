@@ -348,14 +348,14 @@ void
 IRCServer::listRoom(int fd, const char * user, const char * password, const char * args)
 {
   if(checkPassword(fd, user, password)) {
-  for(int i = 0; i < roomVec.size(); i++) {
-        const char * msg = roomVec[i].c_str();
-      write(fd, msg, strlen(msg));
-      const char * msg2 = "\r\n";
-      write(fd, msg2, strlen(msg2));
-    }
+    for(int i = 0; i < roomVec.size(); i++) {
+          const char * msg = roomVec[i].c_str();
+        write(fd, msg, strlen(msg));
+        const char * msg2 = "\r\n";
+        write(fd, msg2, strlen(msg2));
+      }
   } else {
-        const char * msg =  "DENIED\r\n";
+        const char * msg =  "ERROR (Wrong password)\r\n";
       write(fd, msg, strlen(msg));
   }
 }
@@ -380,7 +380,7 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
     write(fd, msg, strlen(msg));
    } 
   } else {
-        const char * msg =  "DENIED\r\n";
+        const char * msg =  "ERROR (Wrong password)\r\n";
       write(fd, msg, strlen(msg));
   } 
 }
@@ -408,7 +408,7 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
         write(fd, msg2, strlen(msg2));
     }
   } else {
-    const char * msg =  "DENIED\r\n";
+    const char * msg =  "ERROR (Wrong password)\r\n";
   write(fd, msg, strlen(msg));
   }
 }
@@ -431,7 +431,7 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
     const char * msg2 =  "OK\r\n";
     write(fd, msg2, strlen(msg2));
   } else {
-      const char * msg =  "DENIED\r\n";
+      const char * msg =  "ERROR (Wrong password)\r\n";
       write(fd, msg, strlen(msg));
   } 
 }
@@ -455,7 +455,7 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
     void * gradev;
     iterator2.next3(fd,msg, gradev, roomCount, from);
   } else {
-      const char * msg =  "DENIED\r\n";
+      const char * msg =  "ERROR (Wrong password)\r\n";
       write(fd, msg, strlen(msg));
   } 
 }
@@ -508,7 +508,7 @@ IRCServer::getAllUsers(int fd, const char * user, const char * password,const  c
     const char * msg4 = "\r\n";
     write(fd, msg4, strlen(msg4));
   } else {
-      const char * msg =  "DENIED\r\n";
+      const char * msg =  "ERROR (Wrong password)\r\n";
       write(fd, msg, strlen(msg));
   }
 }
