@@ -67,18 +67,8 @@ bool HashTableVoid::insertItem2( int fd, const char * key, void * data, int num)
   // use first bucket
   int h = num;
   HashTableVoidEntry * entry = _buckets[h]; 
-  if(entry !=NULL) {
-     if (!strcmp(entry->_key, key)) { // Entry found
-       entry->_data = data;
-       return true;
-     } else {
-        HashTableVoidEntry * entry2 = new HashTableVoidEntry;
-        entry2->_key = strdup(key); 
-        entry2->_data = strdup((char *)data);
-        entry->_next = entry2;
-        entry2->_next = NULL;
-     }
-  } else { // add to start 
+  if(entry ==NULL) {
+     // add to start 
      entry = new HashTableVoidEntry;
      entry->_key = strdup(key); 
      entry->_data = strdup((char *)data);
