@@ -189,8 +189,6 @@ void HashTableVoidIterator::next3(int fd, const char * & key, void * & data, int
    while(_currentEntry != NULL) { 
         data = _currentEntry->_data; // pass or user
         key = _currentEntry->_key; // user or msg
-        const char * msg6 = (const char *) _currentEntry->_data; 
-        write(fd, msg6, strlen(msg6));
         _currentEntry = _currentEntry->_next;
         int a; 
         char buffer[1000];
@@ -202,7 +200,7 @@ void HashTableVoidIterator::next3(int fd, const char * & key, void * & data, int
            }
          e = e->_next;
          }
-        a=sprintf (buffer, "%d %s %s", count, value, key);
+        a=sprintf (buffer, "%d %s %s", count, data, key);
         const char * msg = (const char *) buffer; 
         write(fd, msg, strlen(msg));
         const char * msg3 = "\r\n";
