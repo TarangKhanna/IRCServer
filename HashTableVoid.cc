@@ -62,13 +62,7 @@ bool HashTableVoid::insertItem( const char * key, void * data)
 // Mod of the inserItem function earlier to be used in the IrcServer
 bool HashTableVoid::insertItem2( int fd, const char * key, void * data, int num)
 {
-  // use first bucket  
-  const char * msg = " MESSAGE IS "; 
-  write(fd, msg, strlen(msg)); 
-  const char * msg2 = key; 
-  write(fd, msg2, strlen(msg2)); 
-  const char * msg3 = "\r\n"; 
-  write(fd, msg3, strlen(msg3)); 
+  // use first bucket
   int h = num;
   HashTableVoidEntry * entry = _buckets[h]; 
   while (entry!=NULL) {

@@ -419,11 +419,6 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
    char pRoom[100];
    char message[1025];
    int nRead = sscanf(args,"%s %[^\n]", pRoom, message);
-   const char * msg = " MESSAGE 12123 IS "; 
-   write(fd, msg, strlen(msg)); 
-   const char * msg2 = message; 
-   write(fd, msg2, strlen(msg2)); 
-   const char * msg3 = "\r\n"; 
    if(checkPassword(fd, user, password)) {
     int roomCount = 0; 
     for(int i = 0; i < roomVec.size(); i++) {
