@@ -375,7 +375,7 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
        }
        roomCount++;
     }
-    h.insertItem2(user,(void *)password, roomCount); 
+    h.insertItem2(fd, user,(void *)password, roomCount); 
     const char * msg =  "OK\r\n";
     write(fd, msg, strlen(msg));
    } 
@@ -427,7 +427,7 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
        }
        roomCount++;
     }
-    h2.insertItem2(message,(void *)user, roomCount); // for message and pass
+    h2.insertItem2(fd , message,(void *)user, roomCount); // for message and pass
     const char * msg2 =  "OK\r\n";
     write(fd, msg2, strlen(msg2));
   } else {
