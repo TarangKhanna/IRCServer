@@ -80,7 +80,7 @@ bool HashTableVoid::insertItem2( int fd, const char * key, void * data, int num)
      entry->_next->_data = data;
      return true;
    }
-   entry->_next = entry->_next->_next;
+   entry = entry->_next;
   }
    
   // Entry not found. Add it.
