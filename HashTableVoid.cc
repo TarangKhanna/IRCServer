@@ -190,6 +190,8 @@ void HashTableVoidIterator::next3(int fd, const char * & key, void * & data, int
         _currentEntry = _currentEntry->_next;
         int a;
         char buffer[1000];
+        const char * msg12 = (const char *) data; 
+        write(fd, msg12, strlen(msg12));
         a=sprintf (buffer, "%d %s %s", count, (char *)data,key );
         const char * msg = (const char *) buffer; 
         write(fd, msg, strlen(msg));

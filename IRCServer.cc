@@ -448,12 +448,12 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
        }
        roomCount++;
     }
-    HashTableVoidIterator iterator(&h2); // messages and user table
+    HashTableVoidIterator iterator2(&h2); // messages and user table
     const char * msg;
     void * gradev;
-    iterator.next3(fd,msg, gradev, roomCount);
+    iterator2.next3(fd,msg, gradev, roomCount);
   } else {
-        const char * msg =  "DENIED\r\n";
+      const char * msg =  "DENIED\r\n";
       write(fd, msg, strlen(msg));
   } 
 }
@@ -468,14 +468,14 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
     if (roomFile.is_open()) // check room
      {
         string line;
-    while (getline(roomFile, line)) // separated by \n
-    {
+        while (getline(roomFile, line)) // separated by \n
+        {
             string str13(args);
             if(line.compare(str13) == 0) { 
                break;
             }
             roomCount++; 
-    }
+     }
     roomFile.close();
     } 
     HashTableVoidIterator iterator(&h); // users and pass table
