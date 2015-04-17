@@ -375,8 +375,7 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
        }
        roomCount++;
     }
-    //h[roomCount].insertItem2(message,(void *)user); // for message and pass
-    //h.insertItem2(user,(void *)password, roomCount); 
+    h.insertItem2(user,(void *)password, roomCount); 
     const char * msg =  "OK\r\n";
     write(fd, msg, strlen(msg));
    } 
@@ -404,7 +403,7 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
         const char * msg3 =  "ERROR (No user in room)\r\n";
       write(fd, msg3, strlen(msg3));
     } else {
-      //  h.removeElement2(user, roomCount);
+        h.removeElement2(user, roomCount);
         const char * msg2 =  "OK\r\n";
       write(fd, msg2, strlen(msg2));
     }
