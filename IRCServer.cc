@@ -427,9 +427,17 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
        }
        roomCount++;
     }
-    h2.insertItem2(fd , message,(void *)user, roomCount); // for message and pass
-    const char * msg2 =  "OK\r\n";
-    write(fd, msg2, strlen(msg2));
+    const char * key5;
+    void * gradev;
+    HashTableVoidIterator iterator(&h);
+    if(!iterator.userInRoomExists(fd,key5, gradev, user,roomCount)) {
+        const char * msg3 =  "ERROR (No user in room)\r\n";
+        write(fd, msg3, strlen(msg3));
+    } else {
+        h2.insertItem2(fd , message,(void *)user, roomCount); // for message and pass
+        const char * msg2 =  "OK\r\n";
+        write(fd, msg2, strlen(msg2));
+    }
   } else {
       const char * msg =  "ERROR (Wrong password)\r\n";
       write(fd, msg, strlen(msg));
