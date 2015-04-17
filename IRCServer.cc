@@ -451,7 +451,7 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
     HashTableVoidIterator iterator(&h2); // messages and user table
     const char * msg;
     void * gradev;
-    iterator.next2(fd,msg, gradev, roomCount);
+    iterator.next3(fd,msg, gradev, roomCount);
   } else {
         const char * msg =  "DENIED\r\n";
 	    write(fd, msg, strlen(msg));
