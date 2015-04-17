@@ -1,0 +1,55 @@
+Start Test 8
+Add Users
+ADD-USER superman clarkkent
+response:
+OK
+
+ADD-USER spiderman peterpark
+response:
+OK
+
+ADD-USER aquaman xyz
+response:
+OK
+
+ADD-USER mary poppins
+response:
+OK
+
+Create Room
+CREATE-ROOM superman clarkkent java-programming
+response:
+OK
+
+Enter room
+ENTER-ROOM superman clarkkent java-programming
+response:
+OK
+
+ENTER-ROOM aquaman xyz java-programming
+response:
+OK
+
+Print users in room
+GET-USERS-IN-ROOM mary poppins java-programming
+response:
+aquaman
+superman
+
+
+Enter another user
+ENTER-ROOM mary poppins java-programming
+response:
+OK
+
+Send message
+SEND-MESSAGE spiderman peterpark java-programming
+response:
+ERROR (user not in room)
+
+Get messages
+GET-MESSAGES spiderman peterpark 0 java-programming
+response:
+ERROR (User not in room)
+
+Killing Server
