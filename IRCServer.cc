@@ -494,9 +494,10 @@ void
 IRCServer::getAllUsers(int fd, const char * user, const char * password,const  char * args)
 {
   if(checkPassword(fd, user, password)) {
-    sort(userVec.begin(), userVec.end());
-    for(int i = 0; i < userVec.size(); i++) {
-       const char * msg = userVec[i].c_str();
+    vector<string> new_(userVec);
+    sort(new_.begin(), new_.end());
+    for(int i = 0; i < new_.size(); i++) {
+       const char * msg = new_[i].c_str();
        write(fd, msg, strlen(msg));
        const char * msg3 = "\r\n";
        write(fd, msg3, strlen(msg3));
@@ -504,7 +505,8 @@ IRCServer::getAllUsers(int fd, const char * user, const char * password,const  c
     const char * msg4 = "\r\n";
     write(fd, msg4, strlen(msg4));
   } else {
-        const char * msg =  "DENIED\r\n";
+      const char * msg =  "DENIED\r\n";
       write(fd, msg, strlen(msg));
   }
 }
+
