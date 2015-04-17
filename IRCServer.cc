@@ -252,8 +252,8 @@ IRCServer::initialize()
     passFile.open(PASSWORD_FILE);
     string line;
     int n = 1;
-    //if (passFile.is_open())
-    //{
+    if (passFile.is_open())
+    {
     	while(getline (passFile,line)) {
     	  if(n % 2 == 1) {
             userVec.push_back(line); // user\npassword\n\nuser(2)
@@ -265,7 +265,7 @@ IRCServer::initialize()
             getline (passFile,line); // space
             n++;
          }
-     // }
+      }
       passFile.close();
     }
 	// Initialize users in room
