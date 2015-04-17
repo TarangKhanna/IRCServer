@@ -63,6 +63,17 @@ bool HashTableVoid::insertItem( const char * key, void * data)
 bool HashTableVoid::insertItem2( int fd, const char * key, void * data, int num)
 {
   // use first bucket
+  const char * msg = " ADDING MSG WITH USER!  - ";
+
+       write(fd, msg, strlen(msg));
+       const char * msg2 = key;
+       write(fd, msg2, strlen(msg2));
+       const char * msg3 = "\r\n";
+       write(fd, msg3, strlen(msg3));
+       const char * msg4 = (const char *) data;
+       write(fd, msg4, strlen(msg4));
+        const char * msg5 = "\r\n";
+       write(fd, msg5, strlen(msg5));
   int h = num;
   HashTableVoidEntry * entry = _buckets[h]; 
   while (entry!=NULL) {
