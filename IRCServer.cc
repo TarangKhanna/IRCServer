@@ -439,6 +439,9 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 void 
 IRCServer::getMessages(int fd, const char * user, const char * password, const char * args)
 {
+   int from;
+   char pRoom[100];
+   int nRead = sscanf(args,"%d %[^\n]", from, pRoom);
    if(checkPassword(fd, user, password)) {
     int roomCount = 0; 
     for(int i = 0; i < roomVec.size(); i++) {
@@ -450,7 +453,7 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
     HashTableVoidIterator iterator2(&h2); // messages and user table
     const char * msg;
     void * gradev;
-    iterator2.next3(fd,msg, gradev, roomCount);
+    iterator2.next3(fd,msg, gradev, roomCount, from);
   } else {
       const char * msg =  "DENIED\r\n";
       write(fd, msg, strlen(msg));
