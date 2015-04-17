@@ -441,7 +441,7 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
 {
    int from;
    char pRoom[100];
-   int nRead = sscanf(args,"%d %[^\n]", from, pRoom);
+   int nRead = sscanf(args,"%d %[^\n]", &from, pRoom);
    if(checkPassword(fd, user, password)) {
     int roomCount = 0; 
     for(int i = 0; i < roomVec.size(); i++) {
