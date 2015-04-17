@@ -1,0 +1,16 @@
+56,57c56
+< JUST ADDING USER= 
+< maryOK
+---
+> OK
+61,62c60
+< JUST ADDING USER= 
+< maryOK
+---
+> OK
+67,68c65,66
+< superman0 superman Welcome
+< superman1 superman Hi
+---
+> 0 mary Hi everybody!
+> 1 mary Welcome to the talk program!
