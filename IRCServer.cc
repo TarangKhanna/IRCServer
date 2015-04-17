@@ -427,8 +427,6 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
        }
        roomCount++;
     }
-    const char * msg233 =  user;
-    write(fd, msg233, strlen(msg233));
     h2.insertItem2(message,(void *)user, roomCount); // for message and pass
     const char * msg2 =  "OK\r\n";
     write(fd, msg2, strlen(msg2));
@@ -453,7 +451,7 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
     const char * msg;
     void * gradev;
     iterator2.next3(fd,msg, gradev, roomCount);
-    write(fd, msg, strlen(msg));
+    write(fd, msg, strlen((const char *)gradev));
   } else {
       const char * msg =  "DENIED\r\n";
       write(fd, msg, strlen(msg));
