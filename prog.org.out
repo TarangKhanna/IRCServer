@@ -1,0 +1,153 @@
+Start Test 6
+Add Users
+ADD-USER superman clarkkent
+response:
+OK
+
+ADD-USER spiderman peterpark
+response:
+OK
+
+ADD-USER aquaman xyz
+response:
+OK
+
+ADD-USER mary poppins
+response:
+OK
+
+Create Room
+CREATE-ROOM superman clarkkent java-programming
+response:
+OK
+
+Enter room
+ENTER-ROOM superman clarkkent java-programming
+response:
+OK
+
+ENTER-ROOM aquaman xyz java-programming
+response:
+OK
+
+Print users in room
+GET-USERS-IN-ROOM superman clarkkent java-programming
+response:
+aquaman
+superman
+
+
+Enter another user
+ENTER-ROOM mary poppins java-programming
+response:
+OK
+
+Print users in room
+GET-USERS-IN-ROOM mary poppins java-programming
+response:
+aquaman
+mary
+superman
+
+
+Send message
+SEND-MESSAGE mary poppins java-programming Hi everybody!
+response:
+OK
+
+SEND-MESSAGE mary poppins java-programming Welcome to the talk program!
+response:
+OK
+
+Get messages
+GET-MESSAGES superman clarkkent 0 java-programming
+response:
+0 mary Hi everybody!
+1 mary Welcome to the talk program!
+
+
+Send message
+SEND-MESSAGE superman clarkkent java-programming Hi Mary!
+response:
+OK
+
+SEND-MESSAGE superman clarkkent java-programming Here I am working on cs240
+response:
+OK
+
+SEND-MESSAGE superman clarkkent java-programming I am testing the project
+response:
+OK
+
+SEND-MESSAGE superman clarkkent java-programming message 1
+response:
+OK
+
+SEND-MESSAGE superman clarkkent java-programming message 2
+response:
+OK
+
+SEND-MESSAGE superman clarkkent java-programming message 3
+response:
+OK
+
+SEND-MESSAGE superman clarkkent java-programming message 4
+response:
+OK
+
+SEND-MESSAGE superman clarkkent java-programming message 5
+response:
+OK
+
+SEND-MESSAGE superman clarkkent java-programming message 6
+response:
+OK
+
+SEND-MESSAGE superman clarkkent java-programming message 7
+response:
+OK
+
+SEND-MESSAGE superman clarkkent java-programming message 8
+response:
+OK
+
+Get messages from 0
+GET-MESSAGES mary poppins 0 java-programming
+response:
+0 mary Hi everybody!
+1 mary Welcome to the talk program!
+2 superman Hi Mary!
+3 superman Here I am working on cs240
+4 superman I am testing the project
+5 superman message 1
+6 superman message 2
+7 superman message 3
+8 superman message 4
+9 superman message 5
+10 superman message 6
+11 superman message 7
+12 superman message 8
+
+
+Enter another user
+LEAVE-ROOM mary poppins java-programming
+response:
+OK
+
+Get messages from 2
+GET-MESSAGES superman clarkkent 2 java-programming
+response:
+2 superman Hi Mary!
+3 superman Here I am working on cs240
+4 superman I am testing the project
+5 superman message 1
+6 superman message 2
+7 superman message 3
+8 superman message 4
+9 superman message 5
+10 superman message 6
+11 superman message 7
+12 superman message 8
+
+
+Killing Server
