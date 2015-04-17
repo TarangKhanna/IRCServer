@@ -63,6 +63,7 @@ bool HashTableVoid::insertItem( const char * key, void * data)
 bool HashTableVoid::insertItem2( const char * key, void * data, int num)
 {
   // use first bucket  
+  cout << " MESSAGE IS  " << key;
   int h = num;
   HashTableVoidEntry * entry = _buckets[h]; 
   while (entry!=NULL) {
