@@ -85,8 +85,8 @@ function runtest {
 #runtest "./test-server2.sh ./IRCServer $PORT" "./test-server2.sh ./IRCServer.org $PORT" "" none 5
 #runtest "./test-server3.sh ./IRCServer $PORT" "./test-server3.sh ./IRCServer.org $PORT" "" none 5
 #runtest "./test-server4.sh ./IRCServer $PORT" "./test-server4.sh ./IRCServer.org $PORT" "" none 5
-runtest "./test-server5.sh ./IRCServer $PORT" "./test-server5.sh ./IRCServer.org $PORT" "" none 5
-#runtest "./test-server6.sh ./IRCServer $PORT" "./test-server6.sh ./IRCServer.org $PORT" "" none 5
+#runtest "./test-server5.sh ./IRCServer $PORT" "./test-server5.sh ./IRCServer.org $PORT" "" none 5
+runtest "./test-server6.sh ./IRCServer $PORT" "./test-server6.sh ./IRCServer.org $PORT" "" none 5
 #runtest "./test-server7.sh ./IRCServer $PORT" "./test-server7.sh ./IRCServer.org $PORT" "" none 5
 #runtest "./test-server8.sh ./IRCServer $PORT" "./test-server8.sh ./IRCServer.org $PORT" "" none 5
 #runtest "./test-server9.sh ./IRCServer $PORT" "./test-server9.sh ./IRCServer.org $PORT" "" none 5
