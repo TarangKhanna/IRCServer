@@ -48,7 +48,7 @@ bool HashTableVoid::insertItem( const char * key, void * data)
   while (entry!=NULL) {
    if (!strcmp(entry->_key, key)) { // Entry found
      entry->_data = data;
-   return true;
+     return true;
    }
    entry = entry->_next;
   }
@@ -67,20 +67,35 @@ bool HashTableVoid::insertItem2( int fd, const char * key, void * data, int num)
   // use first bucket
   int h = num;
   HashTableVoidEntry * entry = _buckets[h]; 
-  while (entry!=NULL) {
-   if (!strcmp(entry->_key, key)) { // Entry found
-     entry->_data = data;
+  if(entry !=NULL) {
+     if (!strcmp(entry->_key, key)) { // Entry found
+       entry->_data = data;
+       return true;
+     }
+  } else { // add to start 
+     entry = new HashTableVoidEntry;
+     entry->_key = strdup(key); 
+     entry->_data = strdup((char *)data);
+     entry->_next = _buckets[h]; 
+     _buckets[h] = entry;
+  }
+  while (entry->_next!=NULL) {
+   if (!strcmp(entry->_next->_key, key)) { // Entry found
+     entry->_next->_data = data;
      return true;
    }
-   entry = entry->_next;
+   entry->_next = entry->_next->_next;
   }
+   
   // Entry not found. Add it.
-  entry = new HashTableVoidEntry;
-  entry->_key = strdup(key); 
-  entry->_data = strdup((char *)data);
-  entry->_next = entry; 
-  entry->_next = NULL;
-  //_buckets[h] = entry; // insert at end
+  HashTableVoidEntry * entry2 = new HashTableVoidEntry;
+  entry2->_key = strdup(key); 
+  entry2->_data = strdup((char *)data);
+  entry->_next = entry2;
+  entry2->_next = NULL;
+  //entry2->_next = _buckets[h]; 
+  //_buckets[h] = entry; // insert
+
   return false;
 }
 
