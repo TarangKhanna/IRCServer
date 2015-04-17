@@ -305,7 +305,7 @@ IRCServer::addUser(int fd, const char * user, const char * password, const char 
     } else {
        passFile.open(PASSWORD_FILE, std::fstream::in | std::fstream::out | std::fstream::app);
        passFile << user << '\n' << password << "\n\n";
-       userFile.close(); 
+       passFile.close(); 
        passVec.push_back(password);
        userVec.push_back(user);
        const char * msg =  "OK\r\n";
