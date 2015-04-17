@@ -39,7 +39,9 @@ class HashTableVoid {
   // Find a key in the dictionary and place in "data" the corresponding record
   // Returns false if key is does not exist
   bool find( const char * key, void ** data);
-
+  
+  // mod to find username corresponding to msg
+  bool find2( const char * key, void ** data, int roomCount);
   // Removes an element in the hash table. Return false if key does not exist.
   bool removeElement(const char * key);
   

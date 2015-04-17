@@ -183,6 +183,7 @@ void HashTableVoidIterator::next3(int fd, const char * & key, void * & data, int
 {
    vector<string> msgUserVec;
    _currentEntry = _hashTable->_buckets[num];
+
    int count = 0;
    while(_currentEntry != NULL) { 
         data = _currentEntry->_data; // pass or user
@@ -190,7 +191,15 @@ void HashTableVoidIterator::next3(int fd, const char * & key, void * & data, int
         _currentEntry = _currentEntry->_next;
         int a; 
         char buffer[1000];
-        a=sprintf (buffer, "%d %s %s", count, (char *)data,key);
+        const char * value;
+        HashTableVoidEntry * e = _hashTable->_buckets[num]; 
+        while (e!=NULL) {
+          if (!strcmp(e->_key, key)) { // Entry found
+            value = (const char *) e->_data;
+           }
+         e = e->_next;
+         }
+        a=sprintf (buffer, "%d %s %s", count, value, key);
         const char * msg = (const char *) buffer; 
         write(fd, msg, strlen(msg));
         const char * msg3 = "\r\n";
@@ -200,6 +209,21 @@ void HashTableVoidIterator::next3(int fd, const char * & key, void * & data, int
     const char * msg4 = "\r\n";
     write(fd, msg4, strlen(msg4));
     return;
+}
+
+bool HashTableVoid::find2( const char * key, void ** data, int roomCount)
+{
+  // Get hash bucket 
+   int h = roomCount;
+   HashTableVoidEntry * e = _buckets[h]; 
+   while (e!=NULL) {
+    if (!strcmp(e->_key, key)) { // Entry found
+      *data = e->_data;
+    return true; 
+   }
+   e = e->_next;
+   }
+   return false;
 }
 
 bool HashTableVoid::removeElement2(const char * key, int roomCount)
@@ -224,7 +248,8 @@ bool HashTableVoid::removeElement2(const char * key, int roomCount)
    e = e->_next;
    }
   return false;
-}
+} 
+
 
 bool HashTableVoidIterator::userInRoomExists(int fd, const char * & key, void * & data, const char * user,int num) // sort this
 {
