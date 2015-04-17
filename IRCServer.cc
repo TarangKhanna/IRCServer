@@ -428,11 +428,15 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
        }
        roomCount++;
     }
+    const char * msg23 =  "JUST ADDING USER= \r\n";
+    write(fd, msg23, strlen(msg23));
+    const char * msg233 =  user;
+    write(fd, msg233, strlen(msg233));
     h2.insertItem2(message,(void *)user, roomCount); // for message and pass
     const char * msg2 =  "OK\r\n";
     write(fd, msg2, strlen(msg2));
   } else {
-        const char * msg =  "DENIED\r\n";
+      const char * msg =  "DENIED\r\n";
       write(fd, msg, strlen(msg));
   } 
 }
