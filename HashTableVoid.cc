@@ -179,25 +179,24 @@ void HashTableVoidIterator::next2(int fd, const char * & key, void * & data, int
     return;
 }
 
-void HashTableVoidIterator::next3(int fd, const char * & key, void * & data, int num) // sort this
+void HashTableVoidIterator::next3(int fd, const char * & key, void * & data, int num) // 
 {
-   sortVec.clear();
    vector<string> msgUserVec;
    _currentEntry = _hashTable->_buckets[num];
+   int count = 0;
    while(_currentEntry != NULL) { 
         data = _currentEntry->_data; // pass or user
         key = _currentEntry->_key; // user or msg
         _currentEntry = _currentEntry->_next;
-        sortVec.push_back(key);
+        int a;
+        char buffer[1000];
+        a=sprintf (buffer, "%d %s %s", count, (char *)data,key );
+        const char * msg = (const char *) buffer; 
+        write(fd, msg, strlen(msg));
+        const char * msg3 = "\r\n";
+        write(fd, msg3, strlen(msg3));
+        count++;
    }
-   sort(sortVec.begin(), sortVec.end());
-   // now use find on this key and find user 
-   for(int i = 0; i < sortVec.size(); i++) {
-       const char * msg = sortVec[i].c_str(); 
-       write(fd, msg, strlen(msg));
-       const char * msg3 = "\r\n";
-       write(fd, msg3, strlen(msg3));
-    }
     const char * msg4 = "\r\n";
     write(fd, msg4, strlen(msg4));
     return;
