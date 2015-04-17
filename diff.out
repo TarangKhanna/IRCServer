@@ -1,0 +1,20 @@
+27d26
+<  MESSAGE IS superman
+32d30
+<  MESSAGE IS aquaman
+45d42
+<  MESSAGE IS mary
+59d55
+<  MESSAGE IS Hi
+64d59
+<  MESSAGE IS Welcome
+70,71c65,66
+< 0 superman Welcome
+< 1 superman Hi
+---
+> 0 mary Hi everybody!
+> 1 mary Welcome to the talk program!
+73c68
+< superman
+---
+> 
