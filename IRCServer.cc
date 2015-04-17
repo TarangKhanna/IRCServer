@@ -418,7 +418,7 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
 {
    char pRoom[100];
    char message[1025];
-   int nRead = sscanf(args,"%s %s", pRoom, message);
+   int nRead = sscanf(args,"%s %[\n]", pRoom, message);
    if(checkPassword(fd, user, password)) {
     int roomCount = 0; 
     for(int i = 0; i < roomVec.size(); i++) {
