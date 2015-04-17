@@ -70,7 +70,7 @@ bool HashTableVoid::insertItem2( int fd, const char * key, void * data, int num)
   while (entry!=NULL) {
    if (!strcmp(entry->_key, key)) { // Entry found
      entry->_data = data;
-   return true;
+     return true;
    }
    entry = entry->_next;
   }
@@ -78,8 +78,9 @@ bool HashTableVoid::insertItem2( int fd, const char * key, void * data, int num)
   entry = new HashTableVoidEntry;
   entry->_key = strdup(key); 
   entry->_data = strdup((char *)data);
-  entry->_next = _buckets[h]; 
-  _buckets[h] = entry;
+  entry->_next = entry; 
+  entry->_next = NULL;
+  //_buckets[h] = entry; // insert at end
   return false;
 }
 
