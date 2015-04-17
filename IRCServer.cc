@@ -366,7 +366,7 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
   if(checkPassword(fd, user, password)) {
     if(!roomExists(args)){
             const char * msg = "ERROR (No room)\r\n";
-      write(fd, msg, strlen(msg));
+            write(fd, msg, strlen(msg));
     } else { 
     int roomCount = 0; 
     for(int i = 0; i < roomVec.size(); i++) {
