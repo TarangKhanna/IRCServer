@@ -376,7 +376,7 @@ IRCServer::enterRoom(int fd, const char * user, const char * password, const cha
        }
        roomCount++;
     }
-    h.insertItem2(fd, user,(void *)password, roomCount); 
+    h.insertItem3(fd, user,(void *)password, roomCount); 
     const char * msg =  "OK\r\n";
     write(fd, msg, strlen(msg));
    } 
