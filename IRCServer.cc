@@ -469,8 +469,6 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
         HashTableVoidIterator iterator2(&h2); 
         iterator2.next3(fd,msg, gradev, roomCount, from);
     }
-        
-      
   } else {
       const char * msg =  "ERROR (Wrong password)\r\n";
       write(fd, msg, strlen(msg));
