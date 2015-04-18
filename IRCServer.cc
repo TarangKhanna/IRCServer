@@ -435,7 +435,7 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
     void * gradev;
     HashTableVoidIterator iterator(&h);
     if((!iterator.userInRoomExists(fd,user,roomCount))) {
-       const char * msg2 =  "ERROR (User not in room)\r\n";
+       const char * msg2 =  "ERROR (user not in room)\r\n";
        write(fd, msg2, strlen(msg2));
     } else {
         h2.insertItem2(fd , message,(void *)user, roomCount); // for message and pass
