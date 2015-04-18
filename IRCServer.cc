@@ -486,21 +486,13 @@ void
 IRCServer::getUsersInRoom(int fd, const char * user, const char * password, const char * args)
 {
    if(checkPassword(fd, user, password)) {
-    int roomCount = 0; // this is the number h[roomCount]
-    roomFile.open(ROOM_FILE, std::fstream::in | std::fstream::out | std::fstream::app); 
-    if (roomFile.is_open()) // check room
-     {
-        string line;
-        while (getline(roomFile, line)) // separated by \n
-        {
-            string str13(args);
-            if(line.compare(str13) == 0) { 
-               break;
-            }
-            roomCount++; 
-     }
-    roomFile.close();
-    } // users and pass table
+    int roomCount = 0; 
+    for(int i = 0; i < roomVec.size(); i++) {
+       if((roomVec[i].compare(args) == 0)) {
+          break;
+       }
+       roomCount++;
+    }
     const char * msg;
     void * gradev;
     HashTableVoidIterator iterator(&h);   
