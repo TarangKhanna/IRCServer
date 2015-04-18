@@ -401,7 +401,7 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
     HashTableVoidIterator iterator(&h);
     void * gradev;
     if((!iterator.userInRoomExists(fd,user,roomCount))) {
-       const char * msg2 =  "ERROR (User not in room)\r\n";
+       const char * msg2 =  "ERROR (No user in room)\r\n";
        write(fd, msg2, strlen(msg2));
     } else {
         h.removeElement2(user, roomCount);
