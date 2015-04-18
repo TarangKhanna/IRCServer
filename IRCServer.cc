@@ -405,6 +405,9 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
        write(fd, msg2, strlen(msg2));
     } else {
         h.removeElement2(user, roomCount);
+
+        //remove from vector
+
         const char * msg2 =  "OK\r\n";
         write(fd, msg2, strlen(msg2));
     }
@@ -423,7 +426,7 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
    if(checkPassword(fd, user, password)) {
     int roomCount = 0; 
     for(int i = 0; i < roomVec.size(); i++) {
-       if((roomVec[i].compare(args) == 0)) {
+       if((roomVec[i].compare(pRoom) == 0)) {
           break;
        }
        roomCount++;
@@ -454,7 +457,7 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
    if(checkPassword(fd, user, password)) {
     int roomCount = 0; 
     for(int i = 0; i < roomVec.size(); i++) {
-       if((roomVec[i].compare(args) == 0)) {
+       if((roomVec[i].compare(pRoom) == 0)) {
           break;
        }
        roomCount++;
