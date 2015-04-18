@@ -238,9 +238,10 @@ void HashTableVoidIterator::next3(int fd, const char * & key, void * & data, int
     if(e) {
         const char * msg4 = "NO-NEW-MESSAGES\r\n";
         write(fd, msg4, strlen(msg4));
+    } else {
+        const char * msg4 = "\r\n";
+        write(fd, msg4, strlen(msg4));
     }
-    const char * msg4 = "\r\n";
-    write(fd, msg4, strlen(msg4));
     return;
 }
 
