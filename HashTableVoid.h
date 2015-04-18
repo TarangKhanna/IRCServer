@@ -35,7 +35,8 @@ class HashTableVoid {
   
   // mod for where ircserver 
   bool insertItem2( int fd, const char * key, void * data, int num);
-
+ 
+  bool insertItem3( int fd, const char * key, void * data, int num);
   // Find a key in the dictionary and place in "data" the corresponding record
   // Returns false if key is does not exist
   bool find( const char * key, void ** data);
