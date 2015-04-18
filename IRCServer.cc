@@ -430,7 +430,7 @@ IRCServer::sendMessage(int fd, const char * user, const char * password, const c
     const char * key5;
     void * gradev;
     HashTableVoidIterator iterator(&h);
-    if(!iterator.userInRoomExists(fd,user,roomCount)) {
+    if((!iterator.userInRoomExists(fd,user,roomCount))) {
        const char * msg2 =  "ERROR (user not in room)\r\n";
        write(fd, msg2, strlen(msg2));
     } else {
@@ -469,6 +469,8 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
         HashTableVoidIterator iterator2(&h2); 
         iterator2.next3(fd,msg, gradev, roomCount, from);
     }
+        
+      
   } else {
       const char * msg =  "ERROR (Wrong password)\r\n";
       write(fd, msg, strlen(msg));
