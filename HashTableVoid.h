@@ -59,6 +59,6 @@ class HashTableVoidIterator {
   bool next(const char * & key, void * & data);
   void next2(int fd, const char * & key, void * & data, int num);
   void next3(int fd, const char * & key, void * & data, int num, int from);
-  bool userInRoomExists(int fd, const char * & key, void * & data, const char * user,int num); 
+  bool userInRoomExists(int fd, const char * user,int num); 
 };
 

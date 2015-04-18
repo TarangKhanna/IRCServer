@@ -332,7 +332,7 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
             roomVec.push_back(args);
             numRooms++;
             const char * msg = "OK\r\n";
-      write(fd, msg, strlen(msg));
+            write(fd, msg, strlen(msg));
        } else {
             const char * msg =  "DENIED\r\n";
           write(fd, msg, strlen(msg));
@@ -399,10 +399,14 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
     HashTableVoidIterator iterator(&h);
     const char * key5;
     void * gradev;
+    if(!iterator.userInRoomExists(fd,user,roomCount)) {
+       const char * msg2 =  "ERROR (User not in room)\r\n";
+       write(fd, msg2, strlen(msg2));
+    } else {
         h.removeElement2(user, roomCount);
         const char * msg2 =  "OK\r\n";
         write(fd, msg2, strlen(msg2));
-    
+    }
   } else {
     const char * msg =  "ERROR (Wrong password)\r\n";
   write(fd, msg, strlen(msg));

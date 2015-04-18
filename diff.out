@@ -1,8 +1,0 @@
-48c48
-< OK
----
-> ERROR (user not in room)
-53c53
-< 
----
-> ERROR (User not in room)
