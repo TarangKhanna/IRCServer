@@ -55,7 +55,7 @@ bool HashTableVoid::insertItem( const char * key, void * data)
   // Entry not found. Add it.
   entry = new HashTableVoidEntry;
   entry->_key = strdup(key); 
-  entry->_data = strdup((char *)data);
+  entry->_data = data;
   entry->_next = _buckets[h]; 
   _buckets[h] = entry;
   return false;
