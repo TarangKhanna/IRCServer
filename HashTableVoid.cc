@@ -282,6 +282,12 @@ bool HashTableVoidIterator::userInRoomExists(int fd, const char * user,int num) 
 {
    _currentEntry = _hashTable->_buckets[num];
    while(_currentEntry != NULL) { 
+          const char * msg34 = "HERE user is ";
+            write(fd, msg34, strlen(msg34));
+          const char * msg = (const char *) _currentEntry->_key; 
+            write(fd, msg, strlen(msg));
+            const char * msg3 = "\r\n";
+            write(fd, msg3, strlen(msg3));
         if(strcmp(user, (char *)_currentEntry->_key) == 0) {
            return true;
         }
