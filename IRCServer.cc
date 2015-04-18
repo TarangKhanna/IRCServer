@@ -454,8 +454,7 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
     const char * key5;
     void * gradev;
     HashTableVoidIterator iterator(&h);
-        const char * msg2 =  "OK\r\n";
-        write(fd, msg2, strlen(msg2)); // messages and user table
+        
         const char * msg;
         HashTableVoidIterator iterator2(&h2); 
         iterator2.next3(fd,msg, gradev, roomCount, from);
