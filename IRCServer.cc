@@ -498,7 +498,7 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
     HashTableVoidIterator iterator(&h); // users and pass table
     const char * msg;
     void * gradev;
-    //iterator.next2(fd,msg, gradev, roomCount);
+    iterator.next2(fd,msg, gradev, roomCount);
     //iterator.next(msg, gradev);
   //write(fd, msg, strlen(msg));// print key which is user for h2
    }
