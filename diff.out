@@ -1,0 +1,11 @@
+48,51c48
+< HERE ONLY! Did not enter while HERE user is mary
+< HERE user is aquaman
+< HERE user is superman
+< ERROR (User not in room)
+---
+> ERROR (user not in room)
+56c53
+< HERE ONLY! Did not enter while ERROR (User not in room)
+---
+> ERROR (User not in room)
