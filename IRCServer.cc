@@ -461,7 +461,10 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
     const char * key5;
     void * gradev;
     HashTableVoidIterator iterator(&h);
-    if((!iterator.userInRoomExists(fd,user,roomCount))) {
+    bool e = (!iterator.userInRoomExists(fd,user,roomCount));
+    if(!e) {
+       const char * msg25 = (const char *) e;
+       write(fd, msg25, strlen(msg25));
        const char * msg2 =  "ERROR (User not in room)\r\n";
        write(fd, msg2, strlen(msg2));
     } else {
