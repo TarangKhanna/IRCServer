@@ -46,6 +46,7 @@ fstream userFile;
 fstream roomFile;
 HashTableVoid h; // USER and PASS in room - bucket 0 is room 0
 HashTableVoid h2; // MESSAGE and USER in room - bucket 0 is room 0
+ //iterator 
 vector<string> userVec;
 vector<string> passVec;
 vector<string> roomVec;
@@ -396,8 +397,8 @@ IRCServer::leaveRoom(int fd, const char * user, const char * password, const cha
        }
        roomCount++;
     }
-    HashTableVoidIterator iterator(&h);
     const char * key5;
+    HashTableVoidIterator iterator(&h);
     void * gradev;
     if((!iterator.userInRoomExists(fd,user,roomCount))) {
        const char * msg2 =  "ERROR (User not in room)\r\n";
@@ -460,7 +461,7 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
     }
     const char * key5;
     void * gradev;
-    HashTableVoidIterator iterator(&h); 
+    HashTableVoidIterator iterator(&h);
     if((!iterator.userInRoomExists(fd,user,roomCount))) {
        const char * msg2 =  "ERROR (User not in room)\r\n";
        write(fd, msg2, strlen(msg2));
@@ -496,10 +497,10 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
             roomCount++; 
      }
     roomFile.close();
-    } 
-    HashTableVoidIterator iterator(&h); // users and pass table
+    } // users and pass table
     const char * msg;
     void * gradev;
+    HashTableVoidIterator iterator(&h);   
     iterator.next2(fd,msg, gradev, roomCount);
     //iterator.next(msg, gradev);
   //write(fd, msg, strlen(msg));// print key which is user for h2
