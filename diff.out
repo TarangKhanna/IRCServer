@@ -1,7 +1,0 @@
-48,51c48
-< HERE user is mary
-< HERE user is aquaman
-< HERE user is superman
-< ERROR (User not in room)
----
-> ERROR (user not in room)

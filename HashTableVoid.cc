@@ -281,6 +281,8 @@ bool HashTableVoid::removeElement2(const char * key, int roomCount)
 bool HashTableVoidIterator::userInRoomExists(int fd, const char * user,int num) // sort this
 {
    _currentEntry = _hashTable->_buckets[num];
+   const char * msg344 = "HERE ONLY! Did not enter while ";
+            write(fd, msg344, strlen(msg344));
    while(_currentEntry != NULL) { 
           const char * msg34 = "HERE user is ";
             write(fd, msg34, strlen(msg34));
