@@ -217,6 +217,7 @@ void HashTableVoidIterator::next3(int fd, const char * & key, void * & data, int
    vector<string> msgUserVec;
    _currentEntry = _hashTable->_buckets[num];
    int count = 0;
+   bool e = true;
    while(_currentEntry != NULL) { 
         data = _currentEntry->_data; // pass or user
         key = _currentEntry->_key; // user or msg
@@ -230,9 +231,14 @@ void HashTableVoidIterator::next3(int fd, const char * & key, void * & data, int
             write(fd, msg, strlen(msg));
             const char * msg3 = "\r\n";
             write(fd, msg3, strlen(msg3));
+            e = false; // new messages indeed
         }
         count++;
    }
+    if(e) {
+        const char * msg4 = "NO-NEW-MESSAGES\r\n";
+        write(fd, msg4, strlen(msg4));
+    }
     const char * msg4 = "\r\n";
     write(fd, msg4, strlen(msg4));
     return;
