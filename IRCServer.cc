@@ -349,8 +349,11 @@ void
 IRCServer::listRoom(int fd, const char * user, const char * password, const char * args)
 {
   if(checkPassword(fd, user, password)) {
+    vector<string> roomVec2(roomVec);
+    sort(roomVec2.begin(), roomVec2.end());
     for(int i = 0; i < roomVec.size(); i++) {
-          const char * msg = roomVec[i].c_str();
+        
+        const char * msg = roomVec2[i].c_str();
         write(fd, msg, strlen(msg));
         const char * msg2 = "\r\n";
         write(fd, msg2, strlen(msg2));
