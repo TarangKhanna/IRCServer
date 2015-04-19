@@ -188,14 +188,14 @@ IRCServer::processRequest( int fd )
   printf("COMMAND <user> <password> <arguments>. See below.\n");
   printf("You need to separate the commandLine into those components\n");
   printf("For now, command, user, and password are hardwired.\n");
-    char command1[1025];
+  char command1[1025];
   char user2[1025];
-    char password3[1025]; 
-    char args4[1025];
-    memset(command1, 0, 1025);
-    memset(user2, 0, 1025);
-    memset(password3, 0, 1025);
-    memset(args4, 0, 1025);
+  char password3[1025]; 
+  char args4[1025];
+  memset(command1, 0, 1025);
+  memset(user2, 0, 1025);
+  memset(password3, 0, 1025);
+  memset(args4, 0, 1025);
   int nRead = sscanf(commandLine, "%s %s %s %[^\n]", command1, user2, password3, args4);
   const char * command = command1;
   const char * user = user2;
@@ -249,7 +249,7 @@ IRCServer::processRequest( int fd )
 void
 IRCServer::initialize()
 {
-    printf("Initialize\n");
+    //printf("Initialize\n");
     passFile.open(PASSWORD_FILE);
     string line;
     int n = 1;
