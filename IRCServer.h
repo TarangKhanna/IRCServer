@@ -18,6 +18,7 @@ private:
 public:
 	void initialize();
 	bool checkPassword(int fd, const char * user, const char * password);
+    void login(int fd, const char * user, const char * password);
 	void processRequest( int socket );
 	void addUser(int fd, const char * user, const char * password, const char * args);
 	void enterRoom(int fd, const char * user, const char * password, const char * args);

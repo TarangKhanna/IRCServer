@@ -235,7 +235,7 @@ IRCServer::processRequest( int fd )
     listRoom(fd, user, password, args);
   }
   else if (!strcmp(command, "LOG-IN")) {
-    checkPassword(fd, user, password);
+    login(fd, user, password);
   }
   else {
     const char * msg =  "UNKNOWN COMMAND\r\n";
@@ -288,6 +288,19 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
        }
     }
   return false;
+}
+
+void
+IRCServer::login(int fd, const char * user, const char * password) {
+  // Here check the password--find user and see if correct password 
+    for(int i = 0; i < passVec.size(); i++) {
+       if((passVec[i].compare(password) == 0) && (userVec[i].compare(user) == 0)) {
+         const char * msg =  "OK\r\n";
+         write(fd, msg, strlen(msg));
+       }
+    }
+  const char * msg2 =  "DENIED\r\n";
+  write(fd, msg2, strlen(msg2));
 }
 
 bool
