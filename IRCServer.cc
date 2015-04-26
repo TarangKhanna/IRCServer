@@ -234,6 +234,9 @@ IRCServer::processRequest( int fd )
   else if (!strcmp(command, "LIST-ROOMS")) {
     listRoom(fd, user, password, args);
   }
+  else if (!strcmp(command, "LOG-IN")) {
+    checkPassword(fd, user, password);
+  }
   else {
     const char * msg =  "UNKNOWN COMMAND\r\n";
     write(fd, msg, strlen(msg));
