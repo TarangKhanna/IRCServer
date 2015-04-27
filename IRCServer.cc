@@ -379,7 +379,7 @@ IRCServer::listRoom(int fd, const char * user, const char * password, const char
         write(fd, msg2, strlen(msg2));
       }
   } else {
-        const char * msg =  "ERROR (Wrong password)\r\n";
+      const char * msg =  "ERROR (Wrong password)\r\n";
       write(fd, msg, strlen(msg));
   }
 }
