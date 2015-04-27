@@ -524,7 +524,7 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
   //write(fd, msg, strlen(msg));// print key which is user for h2
    }
  else {
-        const char * msg =  "ERROR (Wrong password)\r\n";
+      const char * msg =  "ERROR (Wrong password)\r\n";
       write(fd, msg, strlen(msg));
   } 
 }
