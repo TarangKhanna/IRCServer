@@ -260,7 +260,7 @@ IRCServer::initialize()
     if (passFile.is_open())
     {
       while(getline (passFile,line)) {
-          if((n % 2 == 1) && (n2 % 2 == 1)) { // odd odd and even even 
+          if((n % 3 == 1)) { // odd odd and even even 
             userVec.push_back(line); // user\npassword\n\nuser(2)
             n++;
             getline (passFile,line);
