@@ -268,17 +268,11 @@ IRCServer::initialize()
             //cout << line << '\n';
             n++;
           } else {
-            //getline (passFile,line); // space
             n++;
           }
       }
       passFile.close();
     }
-  // Initialize users in room
-    //ofstream resetRoom; // reset room file
-    //resetRoom.open(ROOM_FILE, std::ofstream::out | std::ofstream::trunc);
-    //resetRoom.close();
-  // Initalize message list
 }
 
 bool
