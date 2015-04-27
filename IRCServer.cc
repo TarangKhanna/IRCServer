@@ -355,12 +355,12 @@ IRCServer::createRoom(int fd, const char * user, const char * password, const ch
             const char * msg = "OK\r\n";
             write(fd, msg, strlen(msg));
        } else {
-            const char * msg =  "DENIED\r\n";
-          write(fd, msg, strlen(msg));
+          const char * msg3 =  "DENIED\r\n";
+          write(fd, msg3, strlen(msg3));
        }
     } else {
-        const char * msg =  "ERROR (Wrong password)\r\n";
-      write(fd, msg, strlen(msg));
+        const char * msg4 =  "ERROR (Wrong password)\r\n";
+      write(fd, msg4, strlen(msg4));
     }
   return;
 }
