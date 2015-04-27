@@ -273,9 +273,9 @@ IRCServer::initialize()
       passFile.close();
     }
   // Initialize users in room
-    ofstream resetRoom; // reset room file
-    resetRoom.open(ROOM_FILE, std::ofstream::out | std::ofstream::trunc);
-    resetRoom.close();
+    //ofstream resetRoom; // reset room file
+    //resetRoom.open(ROOM_FILE, std::ofstream::out | std::ofstream::trunc);
+    //resetRoom.close();
   // Initalize message list
 }
 
@@ -295,6 +295,7 @@ IRCServer::login(int fd, const char * user, const char * password) {
   // Here check the password--find user and see if correct password 
     bool e = false;
     for(int i = 0; i < passVec.size(); i++) {
+       cout << "Here = " << userVec[i] << '\n';
        if((passVec[i].compare(password) == 0) && (userVec[i].compare(user) == 0)) {
          const char * msg =  "OK\r\n";
          write(fd, msg, strlen(msg));
@@ -302,6 +303,7 @@ IRCServer::login(int fd, const char * user, const char * password) {
        }
     }
     if(!e) {
+
       const char * msg2 =  "DENIED\r\n";
       write(fd, msg2, strlen(msg2));
     }
