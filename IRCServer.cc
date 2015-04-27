@@ -1,4 +1,4 @@
-    
+
 const char * usage =
 "                                                               \n"
 "IRCServer:                                                   \n"
@@ -293,14 +293,18 @@ IRCServer::checkPassword(int fd, const char * user, const char * password) {
 void
 IRCServer::login(int fd, const char * user, const char * password) {
   // Here check the password--find user and see if correct password 
+    bool e = false;
     for(int i = 0; i < passVec.size(); i++) {
        if((passVec[i].compare(password) == 0) && (userVec[i].compare(user) == 0)) {
          const char * msg =  "OK\r\n";
          write(fd, msg, strlen(msg));
+         e = true;
        }
     }
-  const char * msg2 =  "DENIED\r\n";
-  write(fd, msg2, strlen(msg2));
+    if(!e) {
+      const char * msg2 =  "DENIED\r\n";
+      write(fd, msg2, strlen(msg2));
+    }
 }
 
 bool
