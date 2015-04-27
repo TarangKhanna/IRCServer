@@ -256,16 +256,18 @@ IRCServer::initialize()
     passFile.open(PASSWORD_FILE);
     string line;
     int n = 1;
+    int n2 = 1;
     if (passFile.is_open())
     {
       while(getline (passFile,line)) {
-        if(n % 2 == 1) {
+          if((n % 2 == 1) && (n2 % 2 == 1)) { // odd odd and even even 
             userVec.push_back(line); // user\npassword\n\nuser(2)
+            n++;
             getline (passFile,line);
             passVec.push_back(line);
             //cout << line << '\n';
             n++;
-         } else {
+          } else {
             getline (passFile,line); // space
             n++;
           }
