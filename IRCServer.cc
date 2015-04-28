@@ -222,6 +222,9 @@ IRCServer::processRequest( int fd )
   else if (!strcmp(command, "GET-MESSAGES")) {
     getMessages(fd, user, password, args);
   }
+  else if (!strcmp(command, "GET-MESSAGES2")) {
+    getMessages2(fd, user, password, args);
+  }
   else if (!strcmp(command, "GET-USERS-IN-ROOM")) {
     getUsersInRoom(fd, user, password, args);
   }
@@ -502,6 +505,39 @@ IRCServer::getMessages(int fd, const char * user, const char * password, const c
   } 
 }
 
+void 
+IRCServer::getMessages2(int fd, const char * user, const char * password, const char * args)
+{
+   int from;
+   char pRoom[100];
+   int nRead = sscanf(args,"%d %[^\n]", &from, pRoom);
+   if(checkPassword(fd, user, password)) {
+    int roomCount = 0; 
+    for(int i = 0; i < roomVec.size(); i++) {
+       if((roomVec[i].compare(pRoom) == 0)) {
+          break;
+       }
+       roomCount++;
+    }
+    const char * key5;
+    void * gradev;
+    HashTableVoidIterator iterator(&h);
+    if((!iterator.userInRoomExists(fd,user,roomCount))) {
+       const char * msg2 =  "ERROR (User not in room)\r\n";
+       write(fd, msg2, strlen(msg2));
+    } else {
+        const char * msg;
+        HashTableVoidIterator iterator2(&h2); 
+        iterator2.next4(fd,msg, gradev, roomCount, from);
+    }
+        
+      
+  } else {
+      const char * msg =  "ERROR (Wrong password)\r\n";
+      write(fd, msg, strlen(msg));
+  } 
+}
+
 
 void
 IRCServer::getUsersInRoom(int fd, const char * user, const char * password, const char * args)
@@ -522,7 +558,7 @@ IRCServer::getUsersInRoom(int fd, const char * user, const char * password, cons
   //write(fd, msg, strlen(msg));// print key which is user for h2
    }
  else {
-        const char * msg =  "ERROR (Wrong password)\r\n";
+      const char * msg =  "ERROR (Wrong password)\r\n";
       write(fd, msg, strlen(msg));
   } 
 }

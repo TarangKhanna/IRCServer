@@ -245,6 +245,39 @@ void HashTableVoidIterator::next3(int fd, const char * & key, void * & data, int
     return;
 }
 
+void HashTableVoidIterator::next4(int fd, const char * & key, void * & data, int num, int from) // 
+{
+   vector<string> msgUserVec;
+   _currentEntry = _hashTable->_buckets[num];
+   int count = 0;
+   bool e = true;
+   while(_currentEntry != NULL) { 
+        data = _currentEntry->_data; // pass or user
+        key = _currentEntry->_key; // user or msg
+        _currentEntry = _currentEntry->_next;
+        if (count >= from) {
+            int a; 
+            char buffer[1000];
+            const char * value;
+            a=sprintf (buffer, "%s %s", (char *)data, key);
+            const char * msg = (const char *) buffer; 
+            write(fd, msg, strlen(msg));
+            const char * msg3 = "\r\n";
+            write(fd, msg3, strlen(msg3));
+            e = false; // new messages indeed
+        }
+        count++;
+   }
+    if(e) {
+        const char * msg4 = "NO-NEW-MESSAGES\r\n";
+        write(fd, msg4, strlen(msg4));
+    } else {
+        const char * msg4 = "\r\n";
+        write(fd, msg4, strlen(msg4));
+    }
+    return;
+}
+
 bool HashTableVoid::find2( const char * key, void ** data, int roomCount)
 {
   // Get hash bucket 
@@ -296,3 +329,4 @@ bool HashTableVoidIterator::userInRoomExists(int fd, const char * user,int num) 
    }
    return false;
 }
+
