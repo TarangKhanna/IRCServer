@@ -259,7 +259,7 @@ void HashTableVoidIterator::next4(int fd, const char * & key, void * & data, int
             int a; 
             char buffer[1000];
             const char * value;
-            a=sprintf (buffer, "%s %s", (char *)data, key);
+            a=sprintf (buffer, "%s: %s", (char *)data, key);
             const char * msg = (const char *) buffer; 
             write(fd, msg, strlen(msg));
             const char * msg3 = "\r\n";
